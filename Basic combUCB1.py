@@ -20,9 +20,9 @@ import matplotlib.pyplot as plt
 # Algorithm attempts to maximise the return (so should learn to pick the entries at the end of the vector)
 
 ### Set parameters
-L = 220
-K = 20
-iters = 1000
+L = 40
+K = 8
+iters = 10000
 
 ### Set arrays to store at each iteration
 # an upper confidence bound for each element (U)
@@ -62,7 +62,10 @@ for t in list(range(iters))[1:]:
     w_observed[:,t] = w[:,t]*A[:,t]
     c[A[:,t]==1] += 1
 
-# Calcualte the regret based on the weights observed vs weights of optimal action
+# plot development of selected elements
+plt.pcolor(A[1:])
+
+# Calculate the regret based on the weights observed vs weights of optimal action
 # Start from column index 1 as 0 is the initialisation
 actual_return = np.sum(w_observed[:,1:])
 best_return = np.sum(w[-K:,1:])
@@ -75,7 +78,6 @@ upper_bound1 = sum(K*534*np.log(iters)/delta_e_min) + (np.pi**2/3+1)*K*L
 
 upper_bound2 = 47*np.sqrt(K*L*iters*np.log(iters)) + (np.pi**2/3+1)*K*L
 lower_bound2 = min(np.sqrt(K*L*iters), K*iters)/20
-
 
 ### Creating function to test out different parameters
 def combUCB1(K, L, iterations):
