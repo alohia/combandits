@@ -155,7 +155,7 @@ regrets_i = iters[:]
 for i in range(len(iters)):
     regrets_i[i] = combUCB1(K=20, L=1000, iterations=iters[i])
 
-plt.scatter(x=ks, y=regrets_k)
+plt.scatter(x=iters, y=regrets_i)
 plt.title('regret as function of number of iterations/time')
 plt.xlabel('time')
 plt.ylabel('regret')
