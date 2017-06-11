@@ -19,16 +19,6 @@ V = 5
 L = V*V
 iters = 100000
 
-### IDEAS
-# Show that UCB1 explored and finds the optimal paths
-# But should continue to explore a little bit
-# If things keep changing a bit then it should keep exploring
-# But if it gets very confident with one setting and then things change then it may not adapt well
-# So show 1. setting that makes it confident and 2. timeframe that makes it confident
-# show costs of UCB1 vs costs of FPL-TRiX, and when one is higher than the other etc
-# need to save weights of networks to test the same weights on each algorithm
-
-### Could Bt parameter be determined with an algorithm that adjusts it over time, perhaps if costs increase/change?
 
 ### TO CHECK/DISCUSS
 # Does UCB1 work more or less the same by subtracting the bound adjustment instead of adding (i.e. more like LCB)
