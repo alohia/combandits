@@ -20,8 +20,8 @@ import matplotlib.pyplot as plt
 # Algorithm attempts to maximise the return (so should learn to pick the entries at the end of the vector)
 
 ### Set parameters
-L = 40
-K = 8
+L = 20
+K = 5
 iters = 10000
 
 ### Set arrays to store at each iteration
@@ -63,7 +63,10 @@ for t in list(range(iters))[1:]:
     c[A[:,t]==1] += 1
 
 # plot development of selected elements
-plt.pcolor(A[1:])
+plt.pcolor(A[:,1:100])
+plt.xlabel("iteration")
+plt.ylabel("vector element")
+plt.title("CombUCB1 exploration")
 
 # Calculate the regret based on the weights observed vs weights of optimal action
 # Start from column index 1 as 0 is the initialisation

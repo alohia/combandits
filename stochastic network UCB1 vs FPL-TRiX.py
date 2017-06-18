@@ -9,15 +9,16 @@ Created on Sun Jun 11 11:37:29 2017
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import scipy.stats as stats
 truncnorm = stats.truncnorm
 truncexp = stats.truncexpon
 from tqdm import tqdm
 
 ### Set parameters
-V = 5
+V = 10
 L = V*V
-iters = 100000
+iters = 10000
 
 ### IDEAS
 # Show that UCB1 explored and finds the optimal paths
@@ -26,7 +27,6 @@ iters = 100000
 # But if it gets very confident with one setting and then things change then it may not adapt well
 # So show 1. setting that makes it confident and 2. timeframe that makes it confident
 # show costs of UCB1 vs costs of FPL-TRiX, and when one is higher than the other etc
-# need to save weights of networks to test the same weights on each algorithm
 
 ### Could Bt parameter be determined with an algorithm that adjusts it over time, perhaps if costs increase/change?
 
@@ -67,7 +67,6 @@ exploration_parameter = 1.5
 
 ### INIT
 # draw weights for all iterations
-# Draw new weights and store in w
 for t in range(iters):
     # select path means
     path_means = path_means2
@@ -120,7 +119,7 @@ for t in tqdm(range(1, iters)):
     w_observed[:,t] = w[:,t]*A[:,t]
     c[A[:,t]==1] += 1
 
-
+A_UCB = A[:,:]
 
 ### find shortest paths for each iteration
 # calculate actual means
@@ -130,7 +129,7 @@ actual_path_means2 = truncnorm.stats(np.concatenate(lower-path_means2)/sigma, np
 stochastic_network_optimal_paths = np.zeros((L, iters))
 
 for t in tqdm(range(iters)):
-    path_means = path_means2
+    path_means = actual_path_means2
     
     unvisited = list(range(V))
     distances = [999999]*V
@@ -142,7 +141,7 @@ for t in tqdm(range(iters)):
         v = unvisited[i]
         unvisited.pop(i)
         for u in range(V):
-            if distances[u] > distances[v] + path_means[v, u]:
+            if distances[u] > distances[v] + path_means2[v, u]:
                 distances[u] = distances[v] + path_means[v, u]
                 paths[u] = paths[v][:]
                 paths[u].append(u)
@@ -154,15 +153,33 @@ for t in tqdm(range(iters)):
     stochastic_network_optimal_paths[:,t] = np.concatenate(shortest_path_matrix)
 
 # calculate total costs
-stochastic_network_UCB_cost = np.sum(A*w)
+stochastic_network_UCB_cost = np.sum(A_UCB*w)
 stochastic_network_optimal_path_cost = np.sum(stochastic_network_optimal_paths*w)
+
+# optimal path
+plt.pcolor(stochastic_network_optimal_paths[:,1:10000], label = "edges in optimal path")
+plt.xlabel("iteration")
+plt.ylabel("path location in network matrix")
+plt.title("optimal path to take at each iteration")
+yellow_patch = mpatches.Patch(color='yellow', label='edges in optimal path')
+plt.legend(handles=[yellow_patch], bbox_to_anchor=(0.53, 0.98), loc=2)
+plt.savefig('stoch_network_opt_paths.pdf')
+
+# plot chosen paths by CombUCB1
+plt.pcolor(A_UCB[:,1:10000], label = "edges in chosen path")
+plt.xlabel("iteration")
+plt.ylabel("path location in network matrix")
+plt.title("CombUCB1 chosen path at each iteration")
+yellow_patch = mpatches.Patch(color='yellow', label='edges in chosen path')
+plt.legend(handles=[yellow_patch], bbox_to_anchor=(0.53, 0.98), loc=2)
+plt.savefig('stoch_network_UCB1.pdf')
 
 
 
 ### FPL-TRiX on same adversarial network
 # model params
 eta = 1 # this acts against the perturbations, so the higher this is the less significant the perturbations in the combinatorial optimisation
-gamma = 0.1 # the higher this is the more the alorithm explores
+gamma = 0.01 # the lower this is the more the alorithm explores
 Bt = 0.5 # controls the perturbations, increasing this should increase exploration
 
 # matrices to store results
@@ -215,6 +232,17 @@ for t in tqdm(range(1, iters)):
     # update L_hats
     L_hat[:,t] = L_hat[:,(t-1)] + l_hat[:,t]
 
+A_FPL = A[:,:]
+
 stochastic_network_FPL_cost = np.sum(A*w)
 
+
+# plot chosen paths by FPL-TRiX
+plt.pcolor(A_FPL[:,1:10000], label = "edges in chosen path")
+plt.xlabel("iteration")
+plt.ylabel("path location in network matrix")
+plt.title("FPL_TRiX chosen path at each iteration")
+yellow_patch = mpatches.Patch(color='yellow', label='edges in chosen path')
+plt.legend(handles=[yellow_patch], bbox_to_anchor=(0.53, 0.98), loc=2)
+plt.savefig('stoch_network_FPL.pdf')
 
