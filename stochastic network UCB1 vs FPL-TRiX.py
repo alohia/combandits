@@ -20,6 +20,7 @@ V = 10
 L = V*V
 iters = 10000
 
+
 ### IDEAS
 # Show that UCB1 explored and finds the optimal paths
 # But should continue to explore a little bit
@@ -29,6 +30,7 @@ iters = 10000
 # show costs of UCB1 vs costs of FPL-TRiX, and when one is higher than the other etc
 
 ### Could Bt parameter be determined with an algorithm that adjusts it over time, perhaps if costs increase/change?
+
 
 ### TO CHECK/DISCUSS
 # Does UCB1 work more or less the same by subtracting the bound adjustment instead of adding (i.e. more like LCB)
