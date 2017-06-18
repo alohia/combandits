@@ -1,0 +1,10 @@
+\contentsline {section}{\numberline {1}Abstract}{1}
+\contentsline {section}{\numberline {2}Acknowledgements}{2}
+\contentsline {section}{\numberline {3}Introduction}{4}
+\contentsline {section}{\numberline {4}Algorithms}{5}
+\contentsline {subsection}{\numberline {4.1}CombUCB1}{5}
+\contentsline {section}{\numberline {5}Basic Testing}{7}
+\contentsline {subsection}{\numberline {5.1}Basic stochastic setting}{7}
+\contentsline {section}{\numberline {6}Network shortest path problems}{11}
+\contentsline {subsection}{\numberline {6.1}Stochastic networks}{11}
+\contentsline {section}{\numberline {7}Parameters}{14}
