@@ -5,6 +5,7 @@
 \contentsline {subsection}{\numberline {4.1}CombUCB1}{5}
 \contentsline {section}{\numberline {5}Basic Testing}{7}
 \contentsline {subsection}{\numberline {5.1}Basic stochastic setting}{7}
-\contentsline {section}{\numberline {6}Network shortest path problems}{11}
+\contentsline {section}{\numberline {6}Network minimum cost path problems}{11}
 \contentsline {subsection}{\numberline {6.1}Stochastic networks}{11}
+\contentsline {subsection}{\numberline {6.2}Adversarial networks}{12}
 \contentsline {section}{\numberline {7}Parameters}{14}

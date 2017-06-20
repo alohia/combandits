@@ -299,12 +299,12 @@ Include adversarial case here?
 \pagebreak
 
 %----------------------------------------------------------------------------------------
-%	NETWORK SHORTEST PATH PROBLEMS
+%	NETWORK MINIMUM COST PATH PROBLEMS
 %----------------------------------------------------------------------------------------
 
-\section{Network shortest path problems}
+\section{Network minimum cost path problems}
 
-A more sophisticated combinatorial problem to solve is a shortest path problem in a network. In this framework there are V vertices with edges in both directions between each pair of vertices, giving V $\times$ (V-1) edges in total. A path is chosen to travel from some starting vertex to an end vertex. The cost of each edge in the path is then stochastically drawn and the sum of these provides the total cost of the chosen path. The goal is to find the path with minimum expected cost. Clear application of this type of system in real-life could be any type of mass scale distibution such as electricity of communication networks.\\
+A more sophisticated combinatorial problem to solve is a minimum cost path problem in a network. In this framework there are V vertices with edges in both directions between each pair of vertices, giving V $\times$ (V-1) edges in total. A path is chosen to travel from some starting vertex to an end vertex. The cost of each edge in the path is then stochastically drawn and the sum of these provides the total cost of the chosen path. The goal is to find the path with minimum expected cost. Clear application of this type of system in real-life could be any type of mass scale distibution such as electricity of communication networks.\\
 
 Given the much more difficult combinatorial problem, this pushes the algorithms much harder. They will need to work out which higher cost edges are beneficial to use in order to take advantage of low cost paths than lead into or out of them. Thus the relative level of regret should be much higher than the previous more basic problem.\\
 
@@ -318,7 +318,7 @@ Optimal path cost = 2,269
 UCB path cost = 3,742
 FPL-TRiX path cost = 2,735\\
 
-Perhaps surprisingly, FPL-TRiX is able to significantly outperform CombUCB1 in this situation. Figures 7, 8 and 9 show the edges of the optimal path at each iteration, and the edges of the paths chosen by CombUCB1 and FPL-TRiX.\\
+Perhaps surprisingly, FPL-TRiX is able to significantly outperform CombUCB1 in this situation. Figures 7, 8 and 9 show the edges of the optimal path at each iteration, and the edges of the paths chosen by CombUCB1 and FPL-TRiX. FPL-TRiX explores more at first allowing it to find the optimal path more quickly. Whereas CombUCB1 is led towards shorter paths at first, because if all edges start with similar wide confidence intervals then the paths with the least edges will appear to have the lowest costs. It is only after some time (around 200 iterations in this case) that CombUCB1 finds accurate enough estimates of the edges to work out that a longer path is in fact the optimal.\\
 
 \begin{figure}%                 use [hb] only if necceccary!
   \centering
@@ -333,15 +333,18 @@ Perhaps surprisingly, FPL-TRiX is able to significantly outperform CombUCB1 in t
   \label{}
 \end{figure}
 
+COULD TRY TO SET UP A MORE EXTREME SITUATION WHERE A LONGER PATH IS BEST AND COMBUCB1 TAKES AGES TO FIND IT
 
 
 
 
-Adversarial setting
+\subsection{Adversarial networks}
 
-Discussion on where FPL-TRiX can be advantageous
+In this section we will progress to analysing the performance of the algorithms in an adversarial setting. 
 
-Charts showing how the exploration changes between the two algorithms
+Discussion on where FPL-TRiX can be advantageous (is FPL-TRiX best when in situations when 1. a longer path is best and 2. alternative routes are not much more costly so that it's extra exploration isn't too expensive??)
+
+sCharts showing how the exploration changes between the two algorithms
 
 
 \pagebreak
