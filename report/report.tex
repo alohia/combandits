@@ -164,11 +164,11 @@ Examples
 
 \subsection{CombUCB1}
 
-One of the most well-known algorithms for multi-armed bandit problems is UCB1. This has been adapted to the combinatorial setting by Kveton et al [1], who developed combUCB1. After each iteration the algorithm calculates a confidence bound around the empirical mean reward/cost of each element. These confidence bounds are then used in the combinatorial optimization problem, the solution which is the chosen play for the next round. The more observations that are available of an element, the tighter the confidence bound around the expeceted value. Loosely speaking, relatively unobserved items will have larger confidence bounds so they will be explored until ther is more confidence in their expected value.\\
+One of the most well-known algorithms for multi-armed bandit problems is UCB1. This has been adapted to the combinatorial setting by Kveton et al [1], who developed CombUCB1. After each iteration the algorithm calculates a confidence bound around the empirical mean reward/cost of each element. These confidence bounds are then used in the combinatorial optimization problem, the solution of which is the chosen play for the next round. The more observations that are available of an element, the tighter the confidence bound around the expeceted value. Loosely speaking, relatively unobserved items will have larger confidence bounds so they will be explored until there is more confidence in their expected value.\\
 
-The confidence intervals are calculated as:
+The confidence intervals at time $t$ are calculated as:
 
-$$\hat{w}_t(e)\pm c_{t-1,e}$$ where $\hat{w}_{t-1}(e)$ is the average of the observations of option $e$ up to time $t-1$. $c_{t-1,e}$ is calculated as:
+$$\hat{w}_{t-1}(e)\pm c_{t-1,e}$$ where $\hat{w}_{t-1}(e)$ is the average of the observations of option $e$ up to time $t-1$. $c_{t-1,e}$ is calculated as:
 
 $$c_{t-1,e}=\sqrt{\frac{1.5\textrm{log}(t-1)}{n_{t-1}(e)}}$$ where $n_{t-1}(e)$ is the number of times that option $e$ has been observed up to time $t-1$.\\
 
@@ -212,9 +212,9 @@ Update counts and expected values for each edge:
 
 This assumes that one is able to initialize by choosing to observe each edge at least once before starting the algorithm. In practice if this is not feasible then the algorithm will produce a similar output if the initial weight for each edge is assumed to be the maximum (if a maximization problem) or minimum (if a minimization problem) values of the system (but these initial values are then disregarded in the algorithm once an observation has been made).\\
 
-Note that the algorithm is computationally efficient, provide that the optimization problem step is. All other operations are polynomial in L and K.\\
+Note that the algorithm is computationally efficient, provided that the combinatorial optimization can be solved efficiently. All other operations are polynomial in L and K.\\
 
-<><><>TO DO - MAKE SURE EVERYTHING IS DEFINED PROPERLY EARLIER ON<><><>
+TO DO - MAKE SURE EVERYTHING IS DEFINED PROPERLY EARLIER ON
 
 
 FPL-TRiX
@@ -234,7 +234,7 @@ Mathematical results (bounds etc)
 
 \subsection{Basic stochastic setting}
 
-For some initial insight into how the algorithms work in practice we can set up a basic simulation with a trivial "combinatorial" element. In this scenario we will have a vector of length L, and at each round K elements of this vector will be chosen. The weights of each chosen element will then be drawn from a Bernoulli distribution which will have a different mean for each element. A real-life application of such a system could be arranging adverts on a website where only K out of L adverts can be shown at any one time, and the goal is to maximise the number of times a user clicks on a link in an advert.\\
+For some initial insight into how the algorithms work in practice we can set up a basic simulation with a trivial combinatorial element. In this scenario we will have a vector of length L, and at each round K elements of this vector will be chosen. The weights of each chosen element will then be drawn from a Bernoulli distribution with a different mean for each element. A real-life application of such a system could be arranging adverts on a website where only K out of L adverts can be shown at any one time, and the goal is to maximise the number of times a user clicks on a link in an advert.\\
 
 We start by setting L = 20, K = 5 and set the means as incrementally increasing values from 1/20 for the first element to 1 for the last element (so they are 1/20, 2/20, ..., 18/20, 19/20, 1). The game is to maximise the weights observed at each round. Clearly the optimal elements to play at each round are the last 5 elements as they have the highest probability of being drawn as 1. Let us observe how the algorithms explore the different options at different stages.\\
 
@@ -254,25 +254,29 @@ We start by setting L = 20, K = 5 and set the means as incrementally increasing 
   \label{}
 \end{figure}
 
-Figure 1 show how at the outset the algorithm is not confident what the expected value of any of the weights are and so it explores a lot. Figure 2 shows iterations 101 to 200, when the algorithm is starting to learn which elements have the highest expected value. Finally Figure 3 shows the algorithm after 4000 iterations at which time is has become quite confident which are the optimal paths, and does relatively little exploration.\\
+Figure 1 shows how at the outset the algorithm is not confident what the expected value of any of the weights are and so it explores a lot. Figure 2 shows iterations 101 to 200, when the algorithm is starting to learn which elements have the highest expected value. Finally Figure 3 shows the algorithm after 4000 iterations at which time is has become quite confident which are the optimal paths, and does relatively little exploration.\\
 
 The regret risk can be calculated as the sum of observed weights minus the sum of the weights of the top 5 elements of the vector. For 10,000 iterations this gives the following:\\
 
 Optimal path reward = 42,399
+
 Actual path reward = 41,905
+
 Regret = 494\\
 
 The algorithm performs very well at finding a near optimal solution.\\
 
 \noindent \textbf{Adapted-FPL-TRiX}\\
 
-Figures 4, 5 and 6 show the corresponding charts FPL-TRiX but adapted to find a maximum solution as opposed to a minimum solution. In fact this misses part of the essence of FPL-TRiX, which is that it adapts well in adversarial cases by keeping more of an open mind about trying the different options even once it has started to recognise the optimal solution. However, even though this is not exactly FPL-TRiX, it is interesting to include here as, with a bit of parameter tuning, it performs incredibly well in this situation. The reward and regret are:\\
+Figures 4, 5 and 6 show the corresponding charts for FPL-TRiX but adapted to find a maximum solution as opposed to a minimum solution. NEED MORE EXPLANATION HERE ONC ALGORITHM IS WRITTEN ABOVE In fact, by finding a maximum, this misses part of the essence of FPL-TRiX, which is that it adapts well in adversarial cases by keeping more of an open mind about trying the different options even once it has started to recognise the optimal solution. However, even though this is not exactly FPL-TRiX, it is interesting to include here as, with a bit of parameter tuning, it performs incredibly well in this situation. The reward and regret are:\\
 
 Optimal path reward = 42,399
+
 Actual path reward = 42,246
+
 Regret = 153\\
 
-Thus the algorithm outperforms CombUCB1. If you think of this slightly modified FPL-TRiX as part of the family of FPL-TRiX then it shows that this can be a nice adaptable framework to work in.\\
+Thus the algorithm outperforms CombUCB1. If we think of this slightly modified FPL-TRiX as part of the family of FPL-TRiX then it shows that this can be a nice adaptable framework to work in.\\
 
 \begin{figure}%                 use [hb] only if necceccary!
   \centering
@@ -304,21 +308,23 @@ Include adversarial case here?
 
 \section{Network minimum cost path problems}
 
-A more sophisticated combinatorial problem to solve is a minimum cost path problem in a network. In this framework there are V vertices with edges in both directions between each pair of vertices, giving V $\times$ (V-1) edges in total. A path is chosen to travel from some starting vertex to an end vertex. The cost of each edge in the path is then stochastically drawn and the sum of these provides the total cost of the chosen path. The goal is to find the path with minimum expected cost. Clear application of this type of system in real-life could be any type of mass scale distibution such as electricity of communication networks.\\
+A more sophisticated combinatorial problem to solve is a minimum cost path problem in a network. In this framework there are V vertices with edges in both directions between each pair of vertices, giving V $\times$ (V-1) edges in total (in practice if an edge does not exist between two vertices then the cost of the edge can be set to infinity). A path is chosen to travel from some starting vertex to an end vertex. The cost of each edge in the path is then stochastically drawn and the sum of these provides the total cost of the chosen path. The goal is to find the path with minimum expected cost. Clear application of this type of system in real-life could be any type of mass scale distibution such as electricity or communication networks.\\
 
-Given the much more difficult combinatorial problem, this pushes the algorithms much harder. They will need to work out which higher cost edges are beneficial to use in order to take advantage of low cost paths than lead into or out of them. Thus the relative level of regret should be much higher than the previous more basic problem.\\
+Given the more difficult combinatorial problem, this pushes the Algorithms harder. They will need to work out which higher cost edges are beneficial to use in order to take advantage of low cost paths than lead into or out of them. Thus the relative level of regret should be much higher than the previous more basic problem.\\
 
 \subsection{Stochastic networks}
 
-Firstly we look at how the algorithms perform in the stochastic setting, where the weights of the edges are drawn from truncated normal distributions limited to being between 0 and 1. Each edge has a different central point (i.e. different mean), and the variance was kept low at 0.1 so that there is a meaningful difference between the different paths.\\
+Firstly we look at how CombUCB1 and FPL-TRiX perform in the stochastic setting, where the weights of the edges are drawn from truncated normal distributions limited to being between 0 and 1. Each edge has a different central point (i.e. different mean), and the variance was kept low at 0.1 so that there is a meaningful difference between the different paths.\\
 
 With 10 vertices and observing 10,000 iterations the following costs were observed. This was after tuning the FPL-TRiX parameters, in particular reducing the gamma parameter to 0.01.\\
 
 Optimal path cost = 2,269
+
 UCB path cost = 3,742
+
 FPL-TRiX path cost = 2,735\\
 
-Perhaps surprisingly, FPL-TRiX is able to significantly outperform CombUCB1 in this situation. Figures 7, 8 and 9 show the edges of the optimal path at each iteration, and the edges of the paths chosen by CombUCB1 and FPL-TRiX. FPL-TRiX explores more at first allowing it to find the optimal path more quickly. Whereas CombUCB1 is led towards shorter paths at first, because if all edges start with similar wide confidence intervals then the paths with the least edges will appear to have the lowest costs. It is only after some time (around 200 iterations in this case) that CombUCB1 finds accurate enough estimates of the edges to work out that a longer path is in fact the optimal.\\
+Perhaps surprisingly, FPL-TRiX is able to significantly outperform CombUCB1 in this situation. Figures 7, 8 and 9 show the edges of the optimal path at each iteration, and the edges of the paths chosen by CombUCB1 and FPL-TRiX. FPL-TRiX explores more at first allowing it to find the optimal path more quickly, whereas CombUCB1 is led towards shorter paths at first. If all edges start with similar wide confidence intervals then the paths with the least number of edges will appear to have the lowest costs. It is only after some time (around 200 iterations in this case) that CombUCB1 finds accurate enough estimates of the edges to work out that a longer path is in fact the optimal.\\
 
 \begin{figure}%                 use [hb] only if necceccary!
   \centering
@@ -340,7 +346,7 @@ COULD TRY TO SET UP A MORE EXTREME SITUATION WHERE A LONGER PATH IS BEST AND COM
 
 \subsection{Adversarial networks}
 
-In this section we will progress to analysing the performance of the algorithms in an adversarial setting. 
+In this section we will progress to analysing the performance of the algorithms in an adversarial setting.\\
 
 Discussion on where FPL-TRiX can be advantageous (is FPL-TRiX best when in situations when 1. a longer path is best and 2. alternative routes are not much more costly so that it's extra exploration isn't too expensive??)
 

@@ -159,7 +159,7 @@ stochastic_network_UCB_cost = np.sum(A_UCB*w)
 stochastic_network_optimal_path_cost = np.sum(stochastic_network_optimal_paths*w)
 
 # optimal path
-plt.pcolor(stochastic_network_optimal_paths[:,1:10000], label = "edges in optimal path")
+plt.pcolor(stochastic_network_optimal_paths[:,1:1000], label = "edges in optimal path")
 plt.xlabel("iteration")
 plt.ylabel("path location in network matrix")
 plt.title("optimal path to take at each iteration")
@@ -168,7 +168,7 @@ plt.legend(handles=[yellow_patch], bbox_to_anchor=(0.53, 0.98), loc=2)
 plt.savefig('stoch_network_opt_paths.pdf')
 
 # plot chosen paths by CombUCB1
-plt.pcolor(A_UCB[:,1:10000], label = "edges in chosen path")
+plt.pcolor(A_UCB[:,1:1000], label = "edges in chosen path")
 plt.xlabel("iteration")
 plt.ylabel("path location in network matrix")
 plt.title("CombUCB1 chosen path at each iteration")
@@ -240,7 +240,7 @@ stochastic_network_FPL_cost = np.sum(A*w)
 
 
 # plot chosen paths by FPL-TRiX
-plt.pcolor(A_FPL[:,1:10000], label = "edges in chosen path")
+plt.pcolor(A_FPL[:,1:1000], label = "edges in chosen path")
 plt.xlabel("iteration")
 plt.ylabel("path location in network matrix")
 plt.title("FPL_TRiX chosen path at each iteration")

@@ -15,7 +15,7 @@ truncexp = stats.truncexpon
 from tqdm import tqdm
 
 ### Set parameters
-V = 5
+V = 10
 L = V*V
 iters = 10000
 
@@ -224,12 +224,12 @@ adversrial_network_FPL_cost = np.sum(A*w)
 diag_zero = np.ones(L).reshape(V, V) - np.diag(np.ones(V))
 
 path_means3 = np.ones(L).reshape(V, V)
-for i in range(V-1):
-    path_means3[i, i+1] = 0.1
 
-path_means4 = np.ones(L).reshape(V, V)*0.2
+path_means4 = np.ones(L).reshape(V, V)
 for i in range(V-1):
-    path_means4[i, i+1] = 0.1
+    path_means4[i, i+1] = 1/(V*2)
+
+
 
 
 # trunc norm params
