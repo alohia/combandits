@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.2.13)  23 JUN 2017 10:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.2.13)  24 JUN 2017 23:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -56,6 +56,30 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@width=\dimen104
 )
 (./report.aux
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
 
 LaTeX Warning: Label `' multiply defined.
 
@@ -267,6 +291,9 @@ t line 252.
 LaTeX Warning: Float too large for page by 103.08505pt on input line 255.
 
 
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 257--258
 
  []
@@ -286,16 +313,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 267--268
 
  []
 
-[7] [8 <../plots/basicCombUCB1_100iters.pdf> <../plots/basicCombUCB1_100_200ite
-rs.pdf
-
-pdfTeX warning: pdflatex (file ../plots/basicCombUCB1_100_200iters.pdf): PDF in
-clusion: multiple pdfs with page group included in a single page
-> <../plots/basicCombUCB1_4000_4100iters.pdf
-
-pdfTeX warning: pdflatex (file ../plots/basicCombUCB1_4000_4100iters.pdf): PDF 
-inclusion: multiple pdfs with page group included in a single page
->]
+[7]
 Underfull \hbox (badness 10000) in paragraph at lines 269--270
 
  []
@@ -315,7 +333,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 279--280
 
  []
 
-<../plots/basicFPL_100iters.pdf, id=158, 433.62pt x 289.08pt>
+<../plots/basicFPL_100iters.pdf, id=45, 433.62pt x 289.08pt>
 File: ../plots/basicFPL_100iters.pdf Graphic file (type pdf)
 
 <use ../plots/basicFPL_100iters.pdf>
@@ -323,7 +341,7 @@ Package pdftex.def Info: ../plots/basicFPL_100iters.pdf used on input line 283.
 
 (pdftex.def)             Requested size: 284.52756pt x 189.69504pt.
 
-<../plots/basicFPL_100_200iters.pdf, id=159, 433.62pt x 289.08pt>
+<../plots/basicFPL_100_200iters.pdf, id=46, 433.62pt x 289.08pt>
 File: ../plots/basicFPL_100_200iters.pdf Graphic file (type pdf)
 
 <use ../plots/basicFPL_100_200iters.pdf>
@@ -331,7 +349,7 @@ Package pdftex.def Info: ../plots/basicFPL_100_200iters.pdf used on input line
 286.
 (pdftex.def)             Requested size: 284.52756pt x 189.69504pt.
 
-<../plots/basicFPL_4000_4100iters.pdf, id=160, 433.62pt x 289.08pt>
+<../plots/basicFPL_4000_4100iters.pdf, id=47, 433.62pt x 289.08pt>
 File: ../plots/basicFPL_4000_4100iters.pdf Graphic file (type pdf)
 
 <use ../plots/basicFPL_4000_4100iters.pdf>
@@ -342,15 +360,10 @@ e 289.
 
 LaTeX Warning: Float too large for page by 103.08505pt on input line 292.
 
-[9] [10 <../plots/basicFPL_100iters.pdf> <../plots/basicFPL_100_200iters.pdf
 
-pdfTeX warning: pdflatex (file ../plots/basicFPL_100_200iters.pdf): PDF inclusi
-on: multiple pdfs with page group included in a single page
-> <../plots/basicFPL_4000_4100iters.pdf
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-pdfTeX warning: pdflatex (file ../plots/basicFPL_4000_4100iters.pdf): PDF inclu
-sion: multiple pdfs with page group included in a single page
->]
+[8]
 Underfull \hbox (badness 10000) in paragraph at lines 311--312
 
  []
@@ -371,40 +384,204 @@ Underfull \hbox (badness 10000) in paragraph at lines 319--320
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 321--324
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 325--326
 
  []
 
-[11] <../plots/stoch_network_opt_paths.pdf, id=292, 433.62pt x 289.08pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--328
+
+ []
+
+[9] <../plots/stoch_network_opt_paths.pdf, id=54, 433.62pt x 289.08pt>
 File: ../plots/stoch_network_opt_paths.pdf Graphic file (type pdf)
 
 <use ../plots/stoch_network_opt_paths.pdf>
 Package pdftex.def Info: ../plots/stoch_network_opt_paths.pdf used on input lin
-e 329.
+e 331.
 (pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
 
-<../plots/stoch_network_UCB1.pdf, id=293, 433.62pt x 289.08pt>
+<../plots/stoch_network_UCB1.pdf, id=55, 433.62pt x 289.08pt>
 File: ../plots/stoch_network_UCB1.pdf Graphic file (type pdf)
 
 <use ../plots/stoch_network_UCB1.pdf>
-Package pdftex.def Info: ../plots/stoch_network_UCB1.pdf used on input line 332
+Package pdftex.def Info: ../plots/stoch_network_UCB1.pdf used on input line 334
 .
 (pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
 
-<../plots/stoch_network_FPL.pdf, id=294, 433.62pt x 289.08pt>
+<../plots/stoch_network_FPL.pdf, id=56, 433.62pt x 289.08pt>
 File: ../plots/stoch_network_FPL.pdf Graphic file (type pdf)
 
 <use ../plots/stoch_network_FPL.pdf>
-Package pdftex.def Info: ../plots/stoch_network_FPL.pdf used on input line 335.
+Package pdftex.def Info: ../plots/stoch_network_FPL.pdf used on input line 337.
 
 (pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
- [12] [13 <../plots/stoch_network_opt_paths.pdf> <../plots/stoch_network_UCB1.p
-df
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 346--347
+
+ []
+
+<../plots/path_means1.png, id=57, 1016.79875pt x 314.17375pt>
+File: ../plots/path_means1.png Graphic file (type png)
+
+<use ../plots/path_means1.png>
+Package pdftex.def Info: ../plots/path_means1.png used on input line 354.
+(pdftex.def)             Requested size: 426.79134pt x 131.87057pt.
+
+Overfull \hbox (36.79134pt too wide) in paragraph at lines 354--355
+ [][] 
+ []
+
+<../plots/path_means2.png, id=58, 1015.795pt x 319.1925pt>
+File: ../plots/path_means2.png Graphic file (type png)
+
+<use ../plots/path_means2.png>
+Package pdftex.def Info: ../plots/path_means2.png used on input line 357.
+(pdftex.def)             Requested size: 426.79134pt x 134.10863pt.
+
+Overfull \hbox (36.79134pt too wide) in paragraph at lines 357--358
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<../plots/path_means3.png, id=59, 1015.795pt x 318.18875pt>
+File: ../plots/path_means3.png Graphic file (type png)
+
+<use ../plots/path_means3.png>
+Package pdftex.def Info: ../plots/path_means3.png used on input line 368.
+(pdftex.def)             Requested size: 426.79134pt x 133.6869pt.
+
+Overfull \hbox (36.79134pt too wide) in paragraph at lines 368--369
+ [][] 
+ []
+
+<../plots/path_means4.png, id=60, 1015.795pt x 318.18875pt>
+File: ../plots/path_means4.png Graphic file (type png)
+
+<use ../plots/path_means4.png>
+Package pdftex.def Info: ../plots/path_means4.png used on input line 371.
+(pdftex.def)             Requested size: 426.79134pt x 133.6869pt.
+
+Overfull \hbox (36.79134pt too wide) in paragraph at lines 371--372
+ [][] 
+ []
+
+[10]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 378--379
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 380--381
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 382--383
+
+ []
+
+
+Overfull \hbox (102.18974pt too wide) in paragraph at lines 385--410
+[][] 
+ []
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 411--412
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 413--414
+
+ []
+
+<../plots/advers_net2_cumul_costs.jpg, id=67, 433.62pt x 289.08pt>
+File: ../plots/advers_net2_cumul_costs.jpg Graphic file (type jpg)
+
+<use ../plots/advers_net2_cumul_costs.jpg>
+Package pdftex.def Info: ../plots/advers_net2_cumul_costs.jpg used on input lin
+e 417.
+(pdftex.def)             Requested size: 426.79134pt x 284.54036pt.
+
+Overfull \hbox (36.79134pt too wide) in paragraph at lines 417--418
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 422--423
+
+ []
+
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 433--434
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 437--438
+
+ []
+
+<../plots/eta_expl_cost.pdf, id=72, 433.62pt x 289.08pt>
+File: ../plots/eta_expl_cost.pdf Graphic file (type pdf)
+
+<use ../plots/eta_expl_cost.pdf>
+Package pdftex.def Info: ../plots/eta_expl_cost.pdf used on input line 445.
+(pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
+
+<../plots/gamma_expl_cost.pdf, id=73, 433.62pt x 289.08pt>
+File: ../plots/gamma_expl_cost.pdf Graphic file (type pdf)
+
+<use ../plots/gamma_expl_cost.pdf>
+Package pdftex.def Info: ../plots/gamma_expl_cost.pdf used on input line 448.
+(pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
+
+<../plots/Bt_expl_cost.pdf, id=74, 433.62pt x 289.08pt>
+File: ../plots/Bt_expl_cost.pdf Graphic file (type pdf)
+
+<use ../plots/Bt_expl_cost.pdf>
+Package pdftex.def Info: ../plots/Bt_expl_cost.pdf used on input line 451.
+(pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 457.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 457.
+[13] [14] [15 <../plots/basicCombUCB1_100iters.pdf> <../plots/basicCombUCB1_100
+_200iters.pdf
+
+pdfTeX warning: pdflatex (file ../plots/basicCombUCB1_100_200iters.pdf): PDF in
+clusion: multiple pdfs with page group included in a single page
+> <../plots/basicCombUCB1_4000_4100iters.pdf
+
+pdfTeX warning: pdflatex (file ../plots/basicCombUCB1_4000_4100iters.pdf): PDF 
+inclusion: multiple pdfs with page group included in a single page
+>] [16 <../plots/basicFPL_100iters.pdf> <../plots/basicFPL_100_200iters.pdf
+
+pdfTeX warning: pdflatex (file ../plots/basicFPL_100_200iters.pdf): PDF inclusi
+on: multiple pdfs with page group included in a single page
+> <../plots/basicFPL_4000_4100iters.pdf
+
+pdfTeX warning: pdflatex (file ../plots/basicFPL_4000_4100iters.pdf): PDF inclu
+sion: multiple pdfs with page group included in a single page
+>] [17 <../plots/stoch_network_opt_paths.pdf> <../plots/stoch_network_UCB1.pdf
 
 pdfTeX warning: pdflatex (file ../plots/stoch_network_UCB1.pdf): PDF inclusion:
  multiple pdfs with page group included in a single page
@@ -412,36 +589,47 @@ pdfTeX warning: pdflatex (file ../plots/stoch_network_UCB1.pdf): PDF inclusion:
 
 pdfTeX warning: pdflatex (file ../plots/stoch_network_FPL.pdf): PDF inclusion: 
 multiple pdfs with page group included in a single page
->] [14] (./report.aux)
+>] [18 <../plots/path_means1.png> <../plots/path_means2.png>] [19 <../plots/pat
+h_means3.png> <../plots/path_means4.png>] [20 <../plots/advers_net2_cumul_costs
+.jpg>] [21 <../plots/eta_expl_cost.pdf> <../plots/gamma_expl_cost.pdf
+
+pdfTeX warning: pdflatex (file ../plots/gamma_expl_cost.pdf): PDF inclusion: mu
+ltiple pdfs with page group included in a single page
+> <../plots/Bt_expl_cost.pdf
+
+pdfTeX warning: pdflatex (file ../plots/Bt_expl_cost.pdf): PDF inclusion: multi
+ple pdfs with page group included in a single page
+>] (./report.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 1550 strings out of 494953
- 23019 string characters out of 6180977
- 76753 words of memory out of 5000000
- 4830 multiletter control sequences out of 15000+600000
- 11019 words of font info for 38 fonts, out of 8000000 for 9000
+ 1600 strings out of 494953
+ 24267 string characters out of 6180977
+ 88754 words of memory out of 5000000
+ 4868 multiletter control sequences out of 15000+600000
+ 12252 words of font info for 42 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,5n,23p,730b,224s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,8n,23p,798b,226s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on report.pdf (15 pages, 4066217 bytes).
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on report.pdf (22 pages, 4326323 bytes).
 PDF statistics:
- 453 PDF objects out of 1000 (max. 8388607)
- 125 compressed objects within 2 object streams
+ 573 PDF objects out of 1000 (max. 8388607)
+ 159 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 86 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -241,7 +241,7 @@ We start by setting L = 20, K = 5 and set the means as incrementally increasing 
 
 \noindent \textbf{UCB1}\\
 
-\begin{figure}%                 use [hb] only if necceccary!
+\begin{figure}[h]%                 use [hb] only if necceccary!
   \centering
   \includegraphics[width=10cm]{../plots/basicCombUCB1_100iters.pdf}
   \caption{CombUCB1 initial exploration...}
@@ -278,7 +278,7 @@ Regret = 153\\
 
 Thus the algorithm outperforms CombUCB1. If we think of this slightly modified FPL-TRiX as part of the family of FPL-TRiX then it shows that this can be a nice adaptable framework to work in.\\
 
-\begin{figure}%                 use [hb] only if necceccary!
+\begin{figure}[h]%                 use [hb] only if necceccary!
   \centering
   \includegraphics[width=10cm]{../plots/basicFPL_100iters.pdf}
   \caption{Adapted FPL-TRiX initial exploration...}
@@ -326,7 +326,7 @@ FPL-TRiX path cost = 2,735\\
 
 Perhaps surprisingly, FPL-TRiX is able to significantly outperform CombUCB1 in this situation. Figures 7, 8 and 9 show the edges of the optimal path at each iteration, and the edges of the paths chosen by CombUCB1 and FPL-TRiX. FPL-TRiX explores more at first allowing it to find the optimal path more quickly, whereas CombUCB1 is led towards shorter paths at first. If all edges start with similar wide confidence intervals then the paths with the least number of edges will appear to have the lowest costs. It is only after some time (around 200 iterations in this case) that CombUCB1 finds accurate enough estimates of the edges to work out that a longer path is in fact the optimal.\\
 
-\begin{figure}%                 use [hb] only if necceccary!
+\begin{figure}[h]%                 use [hb] only if necceccary!
   \centering
   \includegraphics[width=8cm]{../plots/stoch_network_opt_paths.pdf}
   \caption{Optimal path of stochastic network}
@@ -339,18 +339,87 @@ Perhaps surprisingly, FPL-TRiX is able to significantly outperform CombUCB1 in t
   \label{}
 \end{figure}
 
-COULD TRY TO SET UP A MORE EXTREME SITUATION WHERE A LONGER PATH IS BEST AND COMBUCB1 TAKES AGES TO FIND IT
-
-
 
 
 \subsection{Adversarial networks}
 
-In this section we will progress to analysing the performance of the algorithms in an adversarial setting.\\
+In this section we will progress to analysing the performance of the algorithms in an adversarial setting. To do this we continue the minimum cost path setting of the previous section, but allow the weights of the edges to be drawn from different distributions over different periods. The following three different settings were investigated\\
 
-Discussion on where FPL-TRiX can be advantageous (is FPL-TRiX best when in situations when 1. a longer path is best and 2. alternative routes are not much more costly so that it's extra exploration isn't too expensive??)
+\subsubsection{Adversarial network 1 - long to short optimal path}
 
-sCharts showing how the exploration changes between the two algorithms
+The first adversarial network we analyse starts with the optimal path being to visit each vertex sequentially from the first vertex to the last. Thus with 10 vertices the initial optimal path is nine edges long. After 5,000 iterations the optimal path changes to a shorter path of only two edges. The mean weights of the edges are shown in the network matrices in figures 10 and 11. Element (i,j) of each matrix represents the mean of the truncated normal distribution that the weight of the edge from vertex i to j is drawn from at each iteration. In figure 11 the shortest path is from vertex 0 to 3 and then from 3 to 9
+
+\begin{figure}[h]%                 use [hb] only if necceccary!
+  \centering
+  \includegraphics[width=15cm]{../plots/path_means1.png}
+  \caption{Adversarial network 1 - initial mean edge weights}
+  \label{}
+  \includegraphics[width=15cm]{../plots/path_means2.png}
+  \caption{Adversarial network 1 - second phase mean edge weights}
+  \label{}
+\end{figure}
+
+\subsubsection{Adversarial network 2 - short to long optimal path}
+
+The second adversarial network is similar to the first but in reverse, whereby at first the optimal path is the shortest path, i.e. one edge straight from the first to the last vertex. After 1,000 iterations the optimal paths changes to one with many edges. The network alternates between these two situations every 1,000 iterations. The mean weights of the edges are shown in figures 12 and 13.
+
+\begin{figure}[h]%                 use [hb] only if necceccary!
+  \centering
+  \includegraphics[width=15cm]{../plots/path_means3.png}
+  \caption{Adversarial network 1 - initial mean edge weights}
+  \label{}
+  \includegraphics[width=15cm]{../plots/path_means4.png}
+  \caption{Adversarial network 1 - second phase mean edge weights}
+  \label{}
+\end{figure}
+
+\subsubsection{Adversarial network 3 - wavelike changes}
+
+In this final adversarial case the mean edge weights increase and decrease gradually over time. Each mean edge weight is essentially a point on a sine wave but shifted up by 1 so that it is always positive and divided by 2 so that the mean edge values fall between 0 and 1. The mean edge weights shift along the sine wave over time so that they gradually increase and decrease. The edges are positioned on the sine wave relative to each other depenent on how close the vertices are which they connect. For example the edges between vertices 1 and 4 and between vertices 5 and 8 will be at the same position on the sine wave (because their vertices are labelled 3 numbers apart), but they will be far away from the edge which connects vertices 2 and 9.\\
+
+The idea of this adversarial case is that it represents gradual shifts over time. Each cycle of the sine wave could be thought of as day and night periods for example, where the edges represent the cost of a communication path. During the days the costly edges would be those which connect businesses which are active during the day, and at night the costly edges switch to those which connect homes which become busy as people return from work.\\
+
+The following table shows the total cost of each algorithm for each of the networks. It also shows the cost for the first 1,000 iterations, the middle 1,000 (when networks 1 and 2 shift) and the last 1,000 to show how each algorithm performs at the different stages.\\
+
+
+\begin{tabular}{ |p{4.5cm}||p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|  }
+ \hline
+ \multicolumn{5}{|c|}{Costs of each algorithm over each adversarial network} \\
+ \hline
+ Network                    & Optimal Path  & CombUCB1  & FPL-TRiX  & TS??  \\
+ \hline
+ Adversarial network 1      &               &           &           &       \\
+  - total cost              & 3,684         & 6,196     & 7,652     &       \\
+  - first 1000 iterations   & 450           & 750       & 662       &       \\
+  - middle 1000 iterations  & 367           & 845       & 892       &       \\
+  - final 1000 iterations   & 286           & 452       & 773       &       \\
+ \hline
+ Adversarial network 2      &               &           &           &       \\
+  - total cost              & 7,244         & 12,447    & 11,890    &       \\
+  - first 1000 iterations   & 999           & 1,803     & 1,321     &       \\
+  - middle 1000 iterations  & 723           & 1,087     & 1,142     &       \\
+  - final 1000 iterations   & 450           & 457       & 1,079     &       \\
+ \hline
+ Adversarial network 3      &               &           &           &       \\
+  - total cost              & 3,844         & 5,482     & 6,262     &       \\
+  - first 1000 iterations   & 503           & 809       & 1,007     &       \\
+  - middle 1000 iterations  & 178           & 351       & 296       &       \\
+  - final 1000 iterations   & 781           & 964       & 1,245     &       \\
+ \hline
+\end{tabular}
+
+In the first adversarial network FPL-TRiX is quicker to identify the long optimal path at the beginning (similar to the result in the stochastic setting). Both algorithms move towards the optimal path in the second phase, but CombUCB1 explores less in this stage which ultimately leads to it returning a lower total cost.\\
+
+The second adversarial framework tries to exploit the fact that CombUCB1 can be slower than FPL-TRiX to adapt to new paths. Indeed this seems to be the case as it performs worse. The cost at the end is less with CombUCB1 but this is a result of the end period being the state with the optimal path that CombUCB1 has got stuck in. Looking at the 1,000 iterations prior to this then CombUCB1's cost is 1,995 and FPL-TRiX's cost is 1,150. Figure 14 shows the progress of the costs of each algorithm over time. It is clear that CombUCB1 goes through phases of slowly increasing cost for 1,000 iterations and then rapidly increasing cost for 1,000 iterations.\\
+
+\begin{figure}[h]%                 use [hb] only if necceccary!
+  \centering
+  \includegraphics[width=15cm]{../plots/advers_net2_cumul_costs.jpg}
+  \caption{Adversarial network 2 - cumulative costs}
+  \label{}
+\end{figure}
+
+Finally, when the situation is gradually evolving like in the third case, CombUCB1 never becomes too confident on any paths and so it keeps exploring more and performs well again compared to FPL-TRiX.\\
 
 
 \pagebreak
@@ -361,14 +430,38 @@ sCharts showing how the exploration changes between the two algorithms
 
 \section{Parameters}
 
-Change FPL-TRiX Bt parameter to change exploration at different times.
+From the analysis so far, some benefits of FPL-TRiX over CombUCB1 are that it can identify optimum paths quicker when the minimum cost path is longer, and that it is less prone to becoming stuck in adversarial situations where the the path distributions change relatively quickly. These advantages rely on the ability to tune the parameters in FPL-TRiX to best suit the situation. In the stochastic setting it is beneficial to adjust the parameters to reduce the amount of exploration the algorithm does. In the adversarial case, however, it should help to keep exploration relatively more active in order to identify when the situation changes and there is a new optimal path. In this section we look at the parameters specifically and understand how changing them affects outcomes.\\
+
+\subsection{Exploration score}
+
+To measure the amount of exploration an algorithm is doing we introduce an "impurity" function. This calculates the proportion of iterations in which each edge is chosen. This value is then multiplied by 1 minus itself (so if the value is p then the calculation is p$\times$(1-p)) and then multiplied by 4 so that the possible values range between 0 and 1. Finally the average of these values is taken over all the edges and multiplied by 1,000 so that the numbers are not tiny.\\
+
+\subsection{Parameters, exploration scores and costs}
+
+To see how the parameters affect exploration and cost let us first observe the performance of FPL-TRiX in the stochastic network. Figures 15, 16 and 17 show how the total cost and level of exploration change as the different parameter values change. The main point to note here is that when there is less exploration the algorithm performs better.
+
+\begin{figure}[h]%                 use [hb] only if necceccary!
+  \centering
+  \includegraphics[width=8cm]{../plots/eta_expl_cost.pdf}
+  \caption{Optimal path of stochastic network}
+  \label{}
+  \includegraphics[width=8cm]{../plots/gamma_expl_cost.pdf}
+  \caption{CombUCB1 chosen paths}
+  \label{}
+  \includegraphics[width=8cm]{../plots/Bt_expl_cost.pdf}
+  \caption{FPL-TRiX chosen paths}
+  \label{}
+\end{figure}
+
+
+\subsection{Dynamic $B_t$ parameter}.
 
 Do this with knowledge of when system changes
 
 Setup Bt to dynamically detect when the system changes and increase accordingly
 
 
-Conclusion could be that parameter flexibility of FPL-TRiX allows it to increase or decrease searching as need be to perform better
+Conclusion that parameter flexibility of FPL-TRiX allows it to increase or decrease searching as need be to perform better
 
 \pagebreak
 
