@@ -35,36 +35,6 @@ def impurity(path_matrix):
     return impurity_score
 
 
-###############################
-### setup FPL-TRiX function ###
-###############################
-
-### set mean of each path
-diag_zero = np.ones(L).reshape(V, V) - np.diag(np.ones(V))
-
-path_means1 = np.zeros(L).reshape(V, V)
-for i in range(V):
-    for j in range(V):
-        path_means1[i,j] = abs(i - j)/V - 1/(V*2)
-path_means1 = abs(path_means1 * diag_zero)
-
-path_means2 = np.random.uniform(0, 1, L).reshape(V, V) * diag_zero
-path_means2[0,-1] = 1 # to try to make sure best path isn't to go straight to the end!
-
-# trunc norm params
-lower = 0
-upper = 1
-sigma = 0.1
-
-# draw weights for all iterations
-w = np.zeros((L, iters))
-for t in range(iters):
-    # select path means
-    path_means = path_means2
-
-    # draw weights
-    w[:,t] = np.concatenate(truncnorm.rvs((lower-path_means)/sigma, (upper-path_means)/sigma, loc=path_means, scale=sigma)*diag_zero)
-
 
 ###############################
 ### setup FPL-TRiX function ###
@@ -120,11 +90,47 @@ def fpl_trix(eta, gamma, Bt):
         # update L_hats
         L_hat[:,t] = L_hat[:,(t-1)] + l_hat[:,t]
 
-    cost = stochastic_network_FPL_cost = np.sum(A*w)
+    cost = np.sum(A*w)
     exploration_score = impurity(A)
-    return exploration_score, cost
+    return exploration_score, cost, A
 
-test = fpl_trix(5, 0.001, 5)
+
+
+
+
+######################################
+### set stochastic network weights ###
+######################################
+
+### set mean of each path
+diag_zero = np.ones(L).reshape(V, V) - np.diag(np.ones(V))
+
+path_means1 = np.zeros(L).reshape(V, V)
+for i in range(V):
+    for j in range(V):
+        path_means1[i,j] = abs(i - j)/V - 1/(V*2)
+path_means1 = abs(path_means1 * diag_zero)
+
+path_means2 = np.random.uniform(0, 1, L).reshape(V, V) * diag_zero
+path_means2[0,-1] = 1 # to try to make sure best path isn't to go straight to the end!
+
+# trunc norm params
+lower = 0
+upper = 1
+sigma = 0.1
+
+# draw weights for all iterations
+w = np.zeros((L, iters))
+for t in range(iters):
+    # select path means
+    path_means = path_means2
+
+    # draw weights
+    w[:,t] = np.concatenate(truncnorm.rvs((lower-path_means)/sigma, (upper-path_means)/sigma, loc=path_means, scale=sigma)*diag_zero)
+
+
+
+
 ###############################################################################
 ### changing params and storing and plotting the exploration score and cost ###
 ###############################################################################
@@ -208,12 +214,182 @@ ax2.set_ylabel('total cost', color=(0.9, 0.0, 0.5))
 plt.savefig('Bt_expl_cost.pdf')
 
 
-# plot chosen paths by FPL-TRiX
-plt.pcolor(A_FPL[:,1:1000], label = "edges in chosen path")
+
+
+#################################################
+### similar analysis on adversarial network 2 ###
+#################################################
+
+diag_zero = np.ones(L).reshape(V, V) - np.diag(np.ones(V))
+
+path_means3 = np.zeros(L).reshape(V, V)
+for i in range(V):
+    for j in range(V):
+        path_means3[i,j] = abs(i - j)/V - 1/(V*2)
+path_means3 = abs(path_means3 * diag_zero)
+
+path_means4 = np.random.uniform(0, 1, L).reshape(V, V) * diag_zero
+path_means4[0,-1] = 1 # to try to make sure best path isn't to go straight to the end!
+
+# trunc norm params
+lower = 0
+upper = 1
+sigma = 0.01
+
+
+# Draw new weights and store in w
+w = np.zeros((L, iters))
+for t in range(iters):
+    # select path means
+    if t < iters/2:
+        path_means = path_means3
+    else:
+        path_means = path_means4
+
+    # draw weights
+    w[:,t] = np.concatenate(truncnorm.rvs((lower-path_means)/sigma, (upper-path_means)/sigma, loc=path_means, scale=sigma)*diag_zero)
+
+
+### changing params and storing and plotting costs and exploration score
+
+# parameter ranges to iterate over
+etas = list((0.001, 0.1, 1, 5, 10, 25, 50, 75, 100))
+gammas = list((0.1, 0.05, 0.01, 0.0001, 0.000001))
+Bts = list((1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+
+# set constants to use when varying the other parameters
+eta = 5
+gamma = 0.001
+Bt = 5
+
+# changing etas
+etas_exploration_score = np.zeros(len(etas))
+etas_cost = np.zeros(len(etas))
+for e in range(len(etas)):
+    temp_store = fpl_trix(etas[e], gamma, Bt)
+    etas_exploration_score[e] = temp_store[0]
+    etas_cost[e] = temp_store[1]
+
+#etas_adv_exploration_score_store = etas_exploration_score[:]
+#etas_adv_cost_store = etas_cost[:]
+etas_adv_exploration_score_store = np.vstack((etas_adv_exploration_score_store, etas_exploration_score))
+etas_adv_cost_store = np.vstack((etas_adv_cost_store, etas_cost))
+
+# changing gammas
+gammas_exploration_score = np.zeros(len(gammas))
+gammas_cost = np.zeros(len(gammas))
+for g in range(len(gammas)):
+    temp_store = fpl_trix(eta, gammas[g], Bt)
+    gammas_exploration_score[g] = temp_store[0]
+    gammas_cost[g] = temp_store[1]
+
+#gammas_adv_exploration_score_store = gammas_exploration_score[:]
+#gammas_adv_cost_store = gammas_cost[:]
+gammas_adv_exploration_score_store = np.vstack((gammas_adv_exploration_score_store, gammas_exploration_score))
+gammas_adv_cost_store = np.vstack((gammas_adv_cost_store, gammas_cost))
+
+# changing Bts
+Bts_exploration_score = np.zeros(len(Bts))
+Bts_cost = np.zeros(len(Bts))
+for b in range(len(Bts)):
+    temp_store = fpl_trix(eta, gamma, Bts[b])
+    Bts_exploration_score[b] = temp_store[0]
+    Bts_cost[b] = temp_store[1]
+
+#Bts_adv_exploration_score_store = Bts_exploration_score[:]
+#Bts_adv_cost_store = Bts_cost[:]
+Bts_adv_exploration_score_store = np.vstack((Bts_adv_exploration_score_store, Bts_exploration_score))
+Bts_adv_cost_store = np.vstack((Bts_adv_cost_store, Bts_cost))
+
+# plot eta exploration score and cost
+fig, ax1 = plt.subplots()
+ax2 = ax1.twinx()
+ax1.plot(etas, np.mean(etas_adv_exploration_score_store, axis=0), color=(0.0, 0.2, 0.9))
+ax2.plot(etas, np.mean(etas_adv_cost_store, axis=0), color=(0.9, 0.0, 0.5))
+ax1.set_xlabel('eta')
+ax1.set_ylabel('exploration score', color=(0.0, 0.2, 0.9))
+ax2.set_ylabel('total cost', color=(0.9, 0.0, 0.5))
+plt.savefig('eta_adv_expl_cost.pdf')
+
+# plot gamma exploration score and cost
+fig, ax1 = plt.subplots()
+ax2 = ax1.twinx()
+ax1.plot(gammas, np.mean(gammas_adv_exploration_score_store, axis=0), color=(0.0, 0.2, 0.9))
+ax2.plot(gammas, np.mean(gammas_adv_cost_store, axis=0), color=(0.9, 0.0, 0.5))
+ax1.set_xlabel('gamma')
+ax1.set_ylabel('exploration score', color=(0.0, 0.2, 0.9))
+ax2.set_ylabel('total cost', color=(0.9, 0.0, 0.5))
+plt.savefig('gamma_adv_expl_cost.pdf')
+
+# plot Bt exploration score and cost
+fig, ax1 = plt.subplots()
+ax2 = ax1.twinx()
+ax1.plot(Bts, np.mean(Bts_adv_exploration_score_store, axis=0), color=(0.0, 0.2, 0.9))
+ax2.plot(Bts, np.mean(Bts_adv_cost_store, axis=0), color=(0.9, 0.0, 0.5))
+ax1.set_xlabel('B_t')
+ax1.set_ylabel('exploration score', color=(0.0, 0.2, 0.9))
+ax2.set_ylabel('total cost', color=(0.9, 0.0, 0.5))
+plt.savefig('Bt_adv_expl_cost.pdf')
+
+
+###############################################
+### changing gamma param to suit the situation ###
+###############################################
+
+test = fpl_trix(1, 0.01, 5)
+
+np.sum(test[2][:,:1000]*w[:,:1000])
+np.sum(test[2][:,4000:5000]*w[:,4000:5000])
+np.sum(test[2][:,5000:6000]*w[:,5000:6000])
+np.sum(test[2][:,9000:9999]*w[:,9000:9999])
+np.sum(test[2]*w)
+
+gamma0_01cumul_scores = np.zeros(iters/10)
+for t in tqdm(range(0, iters, 10)):
+    gamma0_01cumul_scores[t/10] = np.sum(test[2][:,:t]*w[:,:t])
+
+
+test = fpl_trix(1, 0.1, 5)
+
+np.sum(test[2][:,:1000]*w[:,:1000])
+np.sum(test[2][:,4000:5000]*w[:,4000:5000])
+np.sum(test[2][:,5000:6000]*w[:,5000:6000])
+np.sum(test[2][:,9000:9999]*w[:,9000:9999])
+np.sum(test[2]*w)
+
+gamma0_1cumul_scores = np.zeros(iters/10)
+for t in tqdm(range(0, iters, 10)):
+    gamma0_1cumul_scores[t/10] = np.sum(test[2][:,:t]*w[:,:t])
+
+
+x_axis = list(range(0, iters, 10))
+
+plt.plot(x_axis, gamma0_01cumul_scores, linewidth = 2.5, c = (1, 0.5, 0.0), alpha = 1, label = "gamma = 0.01")
+plt.plot(x_axis, gamma0_1cumul_scores, linewidth = 2.5, c = (0.0, 0.5, 1), alpha = 1, label = "gamma = 0.1")
 plt.xlabel("iteration")
-plt.ylabel("path location in network matrix")
-plt.title("FPL_TRiX chosen path at each iteration")
-yellow_patch = mpatches.Patch(color='yellow', label='edges in chosen path')
-plt.legend(handles=[yellow_patch], bbox_to_anchor=(0.53, 0.98), loc=2)
-plt.savefig('stoch_network_FPL.pdf')
+plt.ylabel("cumulative cost")
+plt.title("Adversarial network cumulative cost with different gamma parameters")
+plt.legend(ncol = 2)
+plt.savefig('changing_gamma_cumul_cost.jpg')
+
+
+
+
+
+
+gamma_vector = np.concatenate(([0.01]*int(iters/2), [0.1]*int(iters/2)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
