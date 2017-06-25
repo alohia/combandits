@@ -515,7 +515,7 @@ Given that, in practice, the $B_t$ does not have a clearly observable effect on 
  \hline
 \end{tabular}\\
 
-The lower $\gamma$ parameter provides the best results in the early stages but then once the system changes the higher $\gamma$ parameter yields better results. The behaviour over time can be observed in figure XXX.\\
+The lower $\gamma$ parameter provides the best results in the early stages but then once the system changes the higher $\gamma$ parameter yields better results. So can changing the $\gamma$ parameter over time reduce the total cost returned? It seems like a parameter of 0.01 performs best at first and then changing to 0.1 is better for the second stage. However, in reality simply changing the parameter in this way does not lead to the best performance here. The behaviour over time of each scenario can be observed in figure XXX.\\
 
 \begin{figure}[h!]
 \centering
@@ -529,9 +529,7 @@ The lower $\gamma$ parameter provides the best results in the early stages but t
 \label{fig:ullm-particle}
 \end{figure}
 
-
-So can changing the $\gamma$ parameter over time reduce the over cost returned? 
-
+The total cost seems to be largely determined by the settings at the initial stages. Although changing the parameter when the adversarial situation changes does appear to be advantageous compared to keeping it at 0.01, it still lags the performance when gamma is set to 0.1 for the entire time. It does, however, suggest that using some sort of changing $\gamma$ parameter could be beneficial in some cases, and indeed in this case the changing parameter model is lowest cost after around 6,000 iterations.
 
 \pagebreak
 

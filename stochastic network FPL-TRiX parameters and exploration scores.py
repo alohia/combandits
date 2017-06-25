@@ -374,10 +374,81 @@ plt.savefig('changing_gamma_cumul_cost.jpg')
 
 
 
-
-
+### FPL-TRiX with shifting gamma parameter ###
+eta = 1
+Bt = 5
 
 gamma_vector = np.concatenate(([0.01]*int(iters/2), [0.1]*int(iters/2)))
+gamma_vector = np.arange(0.01, 0.1, (0.1-0.01)/(iters))[:iters]
+
+
+# matrices to store results
+Z = np.zeros((L, iters))
+A = np.zeros((L, iters))
+w_observed = np.zeros((L, iters))
+l_hat = np.zeros((L, iters))
+L_hat = np.zeros((L, iters))
+
+
+### Run algorithm from t=1,,, (start at 1 as L_hat is initialised as 0s, so 0th column is this init)
+for t in tqdm(range(1, iters)):
+    
+    # draw perturbation vector
+    Z[:,t] = truncexp.rvs(Bt, size=L)
+    
+    # create path matrix of perturbed leaders
+    perturbed_leader_matrix = (eta*L_hat[:,(t-1)] + Z[:,t]).reshape(V, V)
+    
+    unvisited = list(range(V))
+    distances = [999999]*V
+    distances[0] = 0
+    paths = [[0]]*V
+    # find shortest path
+    while len(unvisited) > 0:
+        i = np.argmin([distances[i] for i in unvisited])
+        v = unvisited[i]
+        unvisited.pop(i)
+        for u in range(V):
+            if distances[u] > distances[v] + perturbed_leader_matrix[v, u]:
+                distances[u] = distances[v] + perturbed_leader_matrix[v, u]
+                paths[u] = paths[v][:]
+                paths[u].append(u)
+                
+    shortest_path = paths[-1]
+    
+    # store observed paths
+    observed_matrix = A[:,t].reshape(V,V)
+    for i in range(len(shortest_path)-1):
+        observed_matrix[shortest_path[i], shortest_path[i+1]] = 1
+    A[:,t] = np.concatenate(observed_matrix)
+    
+    # Store observed weights (0 otherwise) and add 1 to the counts
+    w_observed[:,t] = w[:,t]*A[:,t]
+    
+    # calculate l_hats
+    l_hat[:,t] = w_observed[:,t]/(np.sum(A, axis=1)/t + gamma_vector[t])
+    
+    # update L_hats
+    L_hat[:,t] = L_hat[:,(t-1)] + l_hat[:,t]
+
+
+
+
+gamma_dyn_cumul_scores = np.zeros(iters/10)
+for t in tqdm(range(0, iters, 10)):
+    gamma_dyn_cumul_scores[t/10] = np.sum(A[:,:t]*w[:,:t])
+
+
+x_axis = list(range(0, iters, 10))
+
+plt.plot(x_axis, gamma0_01cumul_scores, linewidth = 2.5, c = (1, 0.5, 0.0), alpha = 1, label = "gamma = 0.01")
+plt.plot(x_axis, gamma0_1cumul_scores, linewidth = 2.5, c = (0.0, 0.5, 1), alpha = 1, label = "gamma = 0.1")
+plt.plot(x_axis, gamma_dyn_cumul_scores, linewidth = 2.5, c = (0.0, 1, 0.0), alpha = 0.5, label = "changing gamma")
+plt.xlabel("iteration")
+plt.ylabel("cumulative cost")
+plt.title("Adversarial network cumulative cost with different gamma parameters")
+plt.legend(ncol = 1)
+plt.savefig('changing_gamma_cumul_cost.jpg')
 
 
 
