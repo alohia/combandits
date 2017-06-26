@@ -155,7 +155,9 @@ An even more challenging scenario is when the costs/rewards are \textbf{adversar
 
 To complicate matters, sometimes the problem to be tackled has a combinatorial element to it, whereby the options to play are chosen subject to satisfying a combiatorial problem. The algorithms developed to combat such a problem therefore need be able to include what is commonly referred to as an "optimization oracle". This can add time and space complexity, but provided the optimization oracle is efficient the algorithms are in general still efficient.\\
 
-To provide some motivation to studying suc problems, there are various real-world problems which fit into the framework outlined above.
+To provide some motivation to studying such problems, there are various real-world scenarios which fit into the framework outlined above. Perhaps the widest use of online bandit algorithms is in website layout. In particular when placing adverts or recommendations on a website. The website provider or marketer has an array of items which they can only use a subset of at any given time. Once they choose a subset to show to customers they receive feedback on the number of times an advert or recommendation was successful. At the next stage they can then either try some of the other adverts/recommendations or stick with the same ones. This problem can become more combinatorial when there are further restrictions places on the available options. For example, adverts of different sizes may have to fit onto a website of particular dimensions, or recommendations may be subject to being less than a total cost of the recommendations.\\
+
+Another prominent problem to solve is the least cost path in a network, such as a communications network or a road network. The cost of each section of each path may depend on the amount of traffic at that point, making the costs non-deterministic. Furthermore, traffic may generally be heavier at certain periods meaning that the expected costs will change over time, giving rise to an adversarial combinatorial bandit problem.
 
 
 \pagebreak
