@@ -1,0 +1,508 @@
+\documentclass[10pt]{beamer}
+
+\usepackage{beamerthemetree}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{graphics}
+\usepackage{subfigure}
+\usepackage{graphicx}
+%\usepackage{rotating}
+\usepackage{relsize}
+%\usepackage{bbm}
+\usepackage{ragged2e}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage[latin1]{inputenc}% if the file is really encoded this way
+
+%\usepackage{bookmark}
+%\usepackage{wrapfig}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{verbatim}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+%\newcommand{\lenitem}[2][.7\linewidth]{\parbox[t]{#1}{\strut #2\strut}}
+
+\setbeamertemplate{footline}[page number]
+
+
+\title[Combinatorial Bandits]{Combinatorial Bandit Algorithms in Practice}
+
+\author[Angus McKay, Akhil Lohia]{
+			Angus McKay \and Akhil Lohia}
+%\institute{University of Cambridge}
+\date{June 2017}
+
+\usetheme{CambridgeUS}
+
+\let\Tiny=\tiny
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+
+\section{Introduction}
+
+
+\begin{frame}{Introduction}
+	\begin{itemize}
+		\item Bandit Algorithms and Online Learning
+		\begin{itemize}
+			\item These problems have generated a lot of interest recently
+		\end{itemize}
+		\item Different variation - semi-bandit and full-bandit
+	\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Introduction}
+	\begin{itemize}
+		\item Stochastic combinatorial semi-bandit problems
+		\begin{enumerate}
+			\item Online learning problem where an agent chooses a subset of ground items at each step - subject to combinatorial constraints
+			\item The stochastic weights of these items are observed and their sum is received as a payoff
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+
+\begin{comment}
+
+\begin{frame}{Introduction}
+	\begin{itemize}
+		\item We develop a model which links wealth, marriage, and sex selection
+		\begin{itemize}
+			\item Dowries and sex selection are jointly determined in the model
+			\item The root cause of sex selection is specific frictions in the marriage market
+		\end{itemize}
+		\item The model generates the prediction that sex selection is increasing with (relative) wealth
+		\begin{itemize}
+			\item The prediction is tested with unique data we have collected, covering the entire population of 1.1 million individuals residing in half a rural district in South India
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Introduction}
+	\begin{itemize}
+		\item The main empirical finding is that the probability that a child is a girl is decreasing as we move up the wealth distribution within castes, which define independent marriage markets in India
+		\begin{itemize}
+			\item The variation in sex ratios within castes in a single (unexceptional) district is comparable to the variation across all districts in the country
+			\item Estimation of the model's structural parameters allows us to quantify the impact of alternative policies
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+
+\section{A Theory of Wealth, Marriage, and Sex Selection}
+
+\begin{frame}{A Theory of Wealth, Marriage, and Sex Selection}
+	% A Theory of Wealth, Marriage, and Sex Selection
+\end{frame}
+
+
+
+
+\begin{frame}{Population}
+	\begin{itemize}
+		\item Each family consists of one parent and one child
+		\item Denote the boy's family wealth by $x$ and the girl's by $y$
+		\item The measure of families with boys and girls will be endogenous as will be the distribution of their wealth, $F(x)$ and $G(y)$, respectively
+		\begin{itemize}
+			\item Without sex selection, $F(\cdot) = G(\cdot)$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Preferences, Payoffs, and Consumption}
+	\begin{itemize}
+		\item Denote the wealth-contingent consumption of parents by $C_x$, $C_y$ and that of the children by $c_x$, $c_y$
+		\item All individuals have logarithmic preferences over consumption and parents, in addition, have altruistic preferences over the consumption of their children
+		\begin{align*}
+			U = \log(C_i) + \log(c_i) ,  \hspace{1cm}  \forall i=\left\lbrace x , y \right\rbrace
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{The Marriage Institution}
+	\begin{itemize}
+		\item The model incorporates the key features of the marriage institution in India
+		\begin{itemize}
+			\item Castes form independent marriage markets and the model describes one such market
+			\item Marriages are arranged, with family wealth being a major consideration when forming a match
+			\item Marriage is patrilocal; i.e. women move into their husband's homes
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{The Marriage Institution}
+	\begin{itemize}
+		\item The benefit of patrilocal marriage is that if a girl matches with a wealthy boy she will get to consume a fraction of the wealth her husband receives as a transfer from his parents
+		\begin{itemize}
+			\item denote the transfer by t
+			\item The boy obtains a fraction $\alpha \geq \frac{1}{2}$ of the transfer, while the wife cannot be prevented from consuming a fraction $1-\alpha$ of what her husband receives
+		\end{itemize}
+		\item The cost of patrilocal marriage is that the boy's parent is only willing to accept the match if the girl's parent pays a dowry $d$
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Consumption Levels}
+	\begin{itemize}
+		\item The consumption of all agents of a married groom-bride pair $(x,y)$ can be written as
+		\begin{align*}
+			c_x &= \alpha t 	\\
+			C_x &= x - t + d 	\\
+			c_y &= (1-\alpha)t 	\\
+			C_y &= y - d 		\\
+		\end{align*}
+		\item We solve backwards, starting with the choice of transfer, $t$, and then deriving the dowry, $d$, in competitive equilibrium
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}{Matching and Sex Selection}
+	\textbf{Proposition 1.} \emph{In equilibrium, there is sex selection at every wealth level and Positive Assortative Matching on wealth, which implies hypergamy}
+	\vspace{0.4cm}
+	\begin{itemize}
+		\item Sex selection is obtained because of the social norm that all girls must marry
+		\item PAM is obtained because wealthy parents are willing to pay a higher dowry to match with wealthy families to ensure higher consumption for their daughters
+		\item The dowry must be increasing steeply enough in $x$ to ensure that the matching is stable
+	\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Wealth and Sex Selection}
+	\begin{itemize}
+		\item How does sex selection vary across the wealth distribution?
+		\begin{itemize}
+			\item Suppose that sex selection is the same at all wealth levels
+			\item The wealthiest boys match with the wealthiest girls, but because of the shortage of girls, all other boys marry down
+			\item Given assortative matching, the wealth-gap increases as we move down the distribution, making it more attractive for poorer parents to have a girl
+			\item Thus, sex selection will decline endogenously as we move down the distribution
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+\section{Results}
+
+
+
+\begin{frame}{Matching Patterns}
+	\begin{figure}
+		% \caption{}
+		\includegraphics[height=8cm,trim={2cm 7cm 2cm 7cm}, clip]{Figures/Match}
+	\end{figure}
+\end{frame}
+
+
+
+\begin{frame}{Dowries and Sex Ratios}
+	\begin{figure}
+		% \caption{}
+		\includegraphics[height=8cm,trim={2cm 7cm 2cm 7cm}, clip]{Figures/dstat+Pr}
+	\end{figure}
+\end{frame}
+
+
+
+
+\begin{frame}{Dowries and Sex Ratios - varying  $\alpha$}
+	\begin{figure}
+		% \caption{Parameter: alpha}
+		\includegraphics[height=8cm,trim={2cm 7cm 2cm 7cm}, clip]{Figures/d+Pr_alpha}
+	\end{figure}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Wealth and Sex Selection: Empirical Results}
+	\begin{itemize}
+		\item The study area is representative of rural Tamil Nadu and rural South India with respect to demographic and socioeconomic characteristics
+		\item No castes that are strongly associated with sex selection are present in the area and sex ratios in Vellore district are around the median in Tamil Nadu
+		\item The relationship between wealth and sex selection \textit{within} castes that we uncover is likely to be valid elsewhere
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Wealth and Sex Ratios: Estimation}
+	\begin{itemize}
+		\item The benchmark equation that we estimate has the following specification:
+		\begin{align*}
+			Pr \left( G_{ij}=1 \right) = \beta R_{ij} + \delta_j + \epsilon_{ij}
+		\end{align*}
+		\begin{itemize}
+			\item $ G_{ij}=1 $ if child $i$ from caste $j$ is a girl, 0 if a boy
+			\item $ R_{ij} $ is the child's family's rank in its caste's wealth distribution
+			\item $ \delta_j $ is a full set of caste dummies
+		\end{itemize}
+		\vspace{0.5cm}
+		\item The sample is restricted to "single family" households, which account for 96.2\% of households with children, and families are ranked in the caste wealth distribution on the basis of their per capita wealth
+	\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Wealth and Sex Ratios: Augmented Specification}
+	\begin{itemize}
+		\item Factors that contributed to the increase in sex selection over time could also generate cross-sectional variation:
+		\begin{enumerate}
+			\item Reduced fertility coupled with the need for at least one son
+			\item Improved access to sex selection technology
+			\item Relative increase in the economic returns to boys versus girls
+		\end{enumerate}
+		\item Additional regressors:
+		\begin{enumerate}
+			\item Household wealth
+			\item Parental education
+			\item Child's birth-order
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Wealth and Sex Ratios (Reported Wealth)}
+	\begin{table}
+		\begin{scriptsize}
+		% \caption{Table5_bmark_reg}
+		\input{Tables/Table5_bmark_reg_1}
+		\end{scriptsize}
+	\end{table}
+\end{frame}
+
+
+
+\begin{frame}{Wealth and Sex Ratios: Predicted Wealth}
+	\begin{itemize}
+		\item Household wealth is measured as the annual income from land and labour in the past year
+		\item This will measure permanent, i.e. mean income, with error
+		\item To purge the measurement error, we estimate the relationship between current household income and village revenue in 1871 interacted with caste fixed effects
+		\begin{itemize}
+			\item The F-statistic for the test of joint significance of historical wealth and the caste dummy interactions is $20.4$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Wealth and Sex Ratios (Predicted Wealth)}
+	\begin{table}
+		\begin{scriptsize}
+		% \caption{Table5_bmark_reg}
+		\input{Tables/Table5_bmark_reg_2}
+		\end{scriptsize}
+	\end{table}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Wealth and Sex Ratios: Robustness Tests}
+	\begin{itemize}
+		\item Family size will not be complete for some children aged 0-6
+		\begin{itemize}
+			\item We thus check the robustness of the results for 7-13 year olds
+		\end{itemize}
+		\item The demand for at least one son is another determinant of sex selection
+		\begin{itemize}
+			\item This mechanism does not affect first borns
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Wealth and Sex Ratios (Robustness Tests)}
+	\begin{table}
+		\begin{scriptsize}
+		% \caption{Table6_rob_firstborns_7to13}
+		\input{Tables/Table6_rob_firstborns_7to13_short}
+		\end{scriptsize}
+	\end{table}
+\end{frame}
+
+
+
+
+\begin{frame}{Wealth and Sex Ratios (All Castes)}
+	\begin{figure}
+		%\caption{Figure7b_sexselection_pooled}
+		\includegraphics[height=6.5cm, trim={0cm 0 5cm 0}, clip]{"Figures/Figure7b_sexselection_pooled"}
+		% CHANGE REQUEST: change blue line to dashed, as in dowry figure
+	\end{figure}
+\end{frame}
+
+
+
+
+\begin{frame}{Wealth and Sex Ratios (Aged 0-6)}
+	\begin{figure}
+		%\caption{Figure7a_sexselection_indiv}
+		\includegraphics[height=6.5cm,keepaspectratio]{"Figures/Figure7a_sexselection_indiv"}
+	\end{figure}
+\end{frame}
+
+
+
+
+\begin{frame}{Wealth and Sex Ratios (Aged 7-13)}
+	\begin{table}[X]
+		%\caption{Figure7a_sexselection_indiv}
+		\includegraphics[height=6.5cm,keepaspectratio]{"Figures/FigureA1_sexselection_7to13"}
+	\end{table}
+\end{frame}
+
+
+
+
+\begin{frame}{Magnitude of Within-Caste Variation}
+	\begin{itemize}
+		\item To quantify the magnitude of the within-caste variation, we partition each caste into eight equally sized wealth classes
+		\item Compare $R^2$ with and without caste fixed effects
+		\begin{itemize}
+			\item Within-caste variation accounts for 70\% of explained variation with 30 largest castes
+			\item 87\% with 12 largest castes
+		\end{itemize}
+		\item Measure the range of sex ratios across the wealth classes
+		\begin{itemize}
+			\item 97 to 117
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Structural Estimates}
+	\begin{table}
+	\scalebox{.52}{
+		% \caption{Parameter: a}
+		%\begin{footnotesize}
+		\input{Tables/pred_sex_ratios_2_both_TEX}
+		%\end{footnotesize}
+	}
+	\end{table}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Counter-Factual Policy Experiments}
+	\begin{enumerate}
+		\item Gift tax on the dowry
+		\item Conditional Cash Transfer schemes
+		\begin{itemize}
+			\item Parents receive transfers at different points in childhood, conditional on having a girl
+			\item An insurance cover is provided, which matures when the girl turns 18 or 20
+			\item Some schemes are restricted to low income families
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Counter-Factual (Tax)}
+	\begin{figure}
+		% \caption{Parameter: alpha}
+		\includegraphics[height=8cm,trim={2cm 7cm 2cm 7cm}, clip]{Figures/counter_tax}
+	\end{figure}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Counter-Factual (Transfers)}
+	\begin{figure}
+		% \caption{Parameter: alpha}
+		\includegraphics[height=8cm,trim={2cm 7cm 2cm 7cm}, clip]{Figures/counter1}
+	\end{figure}
+\end{frame}
+
+
+\end{comment}
+
+\begin{frame}{Conclusion}
+	\begin{itemize}
+		\item Different algorithms perform better in different scenarios
+		\item Adverserial and stochastic settings must be handled differently
+		\begin{itemize}
+			\item We compare CombUCB1, FPL-Trix and CombLinTS
+		\end{itemize}
+		\item next point
+		\begin{itemize}
+			\item sub-point
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Conclusion}
+	\begin{itemize}
+		\item Final remarks
+		\begin{enumerate}
+			\item Remark 1
+			\item Remark 2
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+\end{document}
