@@ -157,7 +157,7 @@ To complicate matters, sometimes the problem to be tackled has a combinatorial e
 
 To provide some motivation to studying such problems, there are various real-world scenarios which fit into the framework outlined above. Perhaps the widest use of online bandit algorithms is in website layout. In particular when placing adverts or recommendations on a website. The website provider or marketer has an array of items which they can only use a subset of at any given time. Once they choose a subset to show to customers they receive feedback on the number of times an advert or recommendation was successful. At the next stage they can then either try some of the other adverts/recommendations or stick with the same ones. This problem can become more combinatorial when there are further restrictions places on the available options. For example, adverts of different sizes may have to fit onto a website of particular dimensions, or recommendations may be subject to being less than a total cost of the recommendations.\\
 
-Another prominent problem to solve is the least cost path in a network, such as a communications network or a road network. The cost of each section of each path may depend on the amount of traffic at that point, making the costs non-deterministic. Furthermore, traffic may generally be heavier at certain periods meaning that the expected costs will change over time, giving rise to an adversarial combinatorial bandit problem.
+Another prominent problem to solve is the least cost path in a network, such as a communications network or a road network. The cost of each section of each path may depend on the amount of traffic at that point, making the costs non-deterministic. Furthermore, traffic may generally be heavier at certain periods meaning that the expected costs will change over time, giving rise to an adversarial combinatorial bandit problem.\\
 
 
 \pagebreak
@@ -223,9 +223,60 @@ Note that the algorithm is computationally efficient, provided that the combinat
 TO DO - MAKE SURE EVERYTHING IS DEFINED PROPERLY EARLIER ON
 
 
-FPL-TRiX
+\subsection{FPL-TRiX}
+
+FPL-TRiX is a Follow the Perturbed Leader algorithm with TRuncated perturbations and Implicit eXploration. In the algorithm, each time an option is observed an amount is added on to a cumulative total for that particular option. This amount is based on the cost of the observed edge at that iteration and the proportion of times that the options has been selected in past iterations. This cumulative total is then used in the combinatorial optimization problem at the next iteration. The fact that the cumulative total increases only for the observed options means that eventually the total of the lower cost edges will always increase above those for the higher cost edges. Thus the higher cost edges will always eventually be explored again. This continued exploration should allow the algorithm to adapt more quickly if the situation changes, i.e. in an adversarial framework.
+
+The algorithm is set out formally below.
+
+\noindent \hrulefill
+
+\noindent \textbf{FPL-TRiX} algorithm for combinatorial semi-bandit problems
+
+\noindent \hrulefill
+
+\noindent \textit{Parameters}:
+
+Learning rates $\eta_t$, exploration parameters $\gamma_t$, truncation parameters $B_t$\\
+
+\noindent \textit{Initialization}:
+
+$\mathbf{\hat{L}}_0 = 0$
+
+$n_0(e) \leftarrow 1$ $\forall$ $e \in E$\\
+
+\noindent \textit{For all t in 1,...,T}:
+
+Draw perturbation vector $\mathbf{Z}_t$ with each component drawn from the exponential distributions truncated at $B_t$\\ 
+
+Solve the optimization problem:
+
+\indent \indent $A_t \leftarrow \textrm{arg min}_{A\in \Theta}(\eta_t\mathbf{\hat{L}}_{t-1}-\mathbf{Z}_t)$\\
+
+Observe the weights of chosen items:
+
+\indent \indent $w_t(e) \sim P_e$ $\forall$ $e \in A_t$
+
+\indent \indent $w_t(e)=0$ otherwise\\
+
+Compute $\hat{l}_{t,i}$ as:
+
+\indent \indent $\hat{l}_{t,i}=\frac{w_t(e)}{q_{t,i}+\gamma_t}$ otherwise
+
+\indent \indent where $q_{t,i}=\textbf{E}[A_{t,i}]$ based on observations up to t-1\\
+
+Update $\mathbf{\hat{L}}_t$:
+
+\indent \indent $\mathbf{\hat{L}}_t=\mathbf{\hat{L}}_{t-1}+\mathbf{\hat{l}}_{t,i}$
+
+\noindent \hrulefill\\
+
+
+\subsection{CombLinTS}
+
 
 Others
+
 
 Mathematical results (bounds etc)	
 
@@ -337,11 +388,13 @@ Firstly we look at how CombUCB1 and FPL-TRiX perform in the stochastic setting, 
 
 With 10 vertices and observing 10,000 iterations the following costs were observed. This was after tuning the FPL-TRiX parameters, in particular reducing the gamma parameter to 0.01.\\
 
-Optimal path cost = 2,269
+Optimal path cost = 3,517
 
-UCB path cost = 3,742
+CombUCB1 path cost = 4,989
 
-FPL-TRiX path cost = 2,735\\
+FPL-TRiX path cost = 4,217
+
+CombLinTS = 3,553\\
 
 Perhaps surprisingly, FPL-TRiX is able to significantly outperform CombUCB1 in this situation. Figure XXX shows the edges of the optimal path at each iteration, and the edges of the paths chosen by CombUCB1 and FPL-TRiX. FPL-TRiX explores more at first allowing it to find the optimal path more quickly, whereas CombUCB1 is led towards shorter paths at first. If all edges start with similar wide confidence intervals then the paths with the least number of edges will appear to have the lowest costs. It is only after some time (around 200 iterations in this case) that CombUCB1 finds accurate enough estimates of the edges to work out that a longer path is in fact the optimal.\\
 
@@ -504,7 +557,7 @@ These parameter adjustments could be carried out with some prior knowledge of th
 Testing out this idea in the adversarial cases previously discussed, however, bares little fruit. The main reason for this is that $B_t$ makes little to no difference on the outcome of the algorithm. In fact the main effect it has is to increase the variance of the result. This can be observed in figure XXX whereby changing the $B_t$ parameter has a seemingly unpredictable effect on the cost.\\
 
 
-\subsection{Dynamic $\gamma$ and $\eta$ parameters instead?}
+\subsection{Dynamic $\gamma$ parameter}
 
 Given that, in practice, the $B_t$ does not have a clearly observable effect on the outcome of FPL-TRiX in an adversarial network, perhaps allowing some of the other parameters to vary could yield better results. Testing the cost at different periods with different $\gamma$ parameters yields the following:\\
 

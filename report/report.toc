@@ -4,16 +4,18 @@
 \contentsline {subsection}{\numberline {3.1}Online learning}{4}
 \contentsline {section}{\numberline {4}Algorithms}{6}
 \contentsline {subsection}{\numberline {4.1}CombUCB1}{6}
-\contentsline {section}{\numberline {5}Basic Testing}{8}
-\contentsline {subsection}{\numberline {5.1}Basic stochastic setting}{8}
-\contentsline {section}{\numberline {6}Network minimum cost path problems}{10}
-\contentsline {subsection}{\numberline {6.1}Stochastic networks}{10}
-\contentsline {subsection}{\numberline {6.2}Adversarial networks}{11}
-\contentsline {subsubsection}{\numberline {6.2.1}Adversarial network 1 - long to short optimal path}{12}
-\contentsline {subsubsection}{\numberline {6.2.2}Adversarial network 2 - short to long optimal path}{13}
-\contentsline {subsubsection}{\numberline {6.2.3}Adversarial network 3 - wavelike changes}{13}
-\contentsline {section}{\numberline {7}Parameters}{16}
-\contentsline {subsection}{\numberline {7.1}Exploration score}{16}
-\contentsline {subsection}{\numberline {7.2}Parameters, exploration scores and costs}{16}
-\contentsline {subsection}{\numberline {7.3}Dynamic $B_t$ parameter}{17}
-\contentsline {subsection}{\numberline {7.4}Dynamic $\gamma $ and $\eta $ parameters instead?}{18}
+\contentsline {subsection}{\numberline {4.2}FPL-TRiX}{7}
+\contentsline {subsection}{\numberline {4.3}CombLinTS}{8}
+\contentsline {section}{\numberline {5}Basic Testing}{9}
+\contentsline {subsection}{\numberline {5.1}Basic stochastic setting}{9}
+\contentsline {section}{\numberline {6}Network minimum cost path problems}{11}
+\contentsline {subsection}{\numberline {6.1}Stochastic networks}{11}
+\contentsline {subsection}{\numberline {6.2}Adversarial networks}{12}
+\contentsline {subsubsection}{\numberline {6.2.1}Adversarial network 1 - long to short optimal path}{13}
+\contentsline {subsubsection}{\numberline {6.2.2}Adversarial network 2 - short to long optimal path}{14}
+\contentsline {subsubsection}{\numberline {6.2.3}Adversarial network 3 - wavelike changes}{14}
+\contentsline {section}{\numberline {7}Parameters}{17}
+\contentsline {subsection}{\numberline {7.1}Exploration score}{17}
+\contentsline {subsection}{\numberline {7.2}Parameters, exploration scores and costs}{17}
+\contentsline {subsection}{\numberline {7.3}Dynamic $B_t$ parameter}{18}
+\contentsline {subsection}{\numberline {7.4}Dynamic $\gamma $ parameter}{19}
