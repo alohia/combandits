@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.2.13)  29 JUN 2017 15:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.2.13)  29 JUN 2017 19:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -261,37 +261,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 160--161
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 173--174
+Underfull \hbox (badness 10000) in paragraph at lines 175--176
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 179--180
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 193--194
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 199--200
+Underfull \hbox (badness 10000) in paragraph at lines 181--182
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 203--204
+Underfull \hbox (badness 10000) in paragraph at lines 195--196
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--210
+Underfull \hbox (badness 10000) in paragraph at lines 201--202
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 217--218
+Underfull \hbox (badness 10000) in paragraph at lines 205--206
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--212
 
  []
 
@@ -306,47 +301,57 @@ Underfull \hbox (badness 10000) in paragraph at lines 221--222
  []
 
 
-Overfull \hbox (0.32742pt too wide) in paragraph at lines 223--224
-[]\OT1/cmr/m/n/12 TO DO - MAKE SURE EV-ERY-THING IS DE-FINED PROP-ERLY EAR-
+Underfull \hbox (badness 10000) in paragraph at lines 223--224
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 229--230
+
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 240--241
+Underfull \hbox (badness 10000) in paragraph at lines 241--242
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 246--247
+Underfull \hbox (badness 10000) in paragraph at lines 247--248
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 250--251
+Underfull \hbox (badness 10000) in paragraph at lines 251--252
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 254--255
+Underfull \hbox (badness 10000) in paragraph at lines 255--256
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--261
+Underfull \hbox (badness 10000) in paragraph at lines 261--262
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 266--267
+Underfull \hbox (badness 10000) in paragraph at lines 267--268
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--273
+Underfull \hbox (badness 10000) in paragraph at lines 273--274
 
  []
 
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 294--295
+[8] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 291--292
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 293--294
 
  []
 
@@ -355,54 +360,49 @@ Underfull \hbox (badness 10000) in paragraph at lines 296--297
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 299--300
-
- []
-
-<../plots/basicCombUCB1_100iters.pdf, id=45, 433.62pt x 289.08pt>
+<../plots/basicCombUCB1_100iters.pdf, id=48, 433.62pt x 289.08pt>
 File: ../plots/basicCombUCB1_100iters.pdf Graphic file (type pdf)
 
 <use ../plots/basicCombUCB1_100iters.pdf>
 Package pdftex.def Info: ../plots/basicCombUCB1_100iters.pdf used on input line
- 307.
+ 304.
 (pdftex.def)             Requested size: 142.26378pt x 94.8409pt.
 
-Overfull \hbox (13.56306pt too wide) in paragraph at lines 307--308
+Overfull \hbox (13.56306pt too wide) in paragraph at lines 304--305
  [][] 
  []
 
-<../plots/basicCombUCB1_100_200iters.pdf, id=46, 433.62pt x 289.08pt>
+<../plots/basicCombUCB1_100_200iters.pdf, id=49, 433.62pt x 289.08pt>
 File: ../plots/basicCombUCB1_100_200iters.pdf Graphic file (type pdf)
 
 <use ../plots/basicCombUCB1_100_200iters.pdf>
 Package pdftex.def Info: ../plots/basicCombUCB1_100_200iters.pdf used on input 
-line 311.
+line 308.
 (pdftex.def)             Requested size: 142.26378pt x 94.8409pt.
 
-Overfull \hbox (13.56306pt too wide) in paragraph at lines 311--312
+Overfull \hbox (13.56306pt too wide) in paragraph at lines 308--309
  [][] 
  []
 
-<../plots/basicCombUCB1_4000_4100iters.pdf, id=47, 433.62pt x 289.08pt>
+<../plots/basicCombUCB1_4000_4100iters.pdf, id=50, 433.62pt x 289.08pt>
 File: ../plots/basicCombUCB1_4000_4100iters.pdf Graphic file (type pdf)
 
 <use ../plots/basicCombUCB1_4000_4100iters.pdf>
 Package pdftex.def Info: ../plots/basicCombUCB1_4000_4100iters.pdf used on inpu
-t line 315.
+t line 312.
 (pdftex.def)             Requested size: 142.26378pt x 94.8409pt.
 
-Overfull \hbox (13.56306pt too wide) in paragraph at lines 315--316
+Overfull \hbox (13.56306pt too wide) in paragraph at lines 312--313
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 321--322
+Underfull \hbox (badness 10000) in paragraph at lines 318--319
 
  []
 
-[9 <../plots/basicCombUCB1_100iters.pdf> <../plots/basicCombUCB1_100_200iters.p
-df
+[10 <../plots/basicCombUCB1_100iters.pdf> <../plots/basicCombUCB1_100_200iters.
+pdf
 
 pdfTeX warning: pdflatex (file ../plots/basicCombUCB1_100_200iters.pdf): PDF in
 clusion: multiple pdfs with page group included in a single page
@@ -411,105 +411,100 @@ clusion: multiple pdfs with page group included in a single page
 pdfTeX warning: pdflatex (file ../plots/basicCombUCB1_4000_4100iters.pdf): PDF 
 inclusion: multiple pdfs with page group included in a single page
 >]
-Underfull \hbox (badness 10000) in paragraph at lines 323--324
+Underfull \hbox (badness 10000) in paragraph at lines 320--321
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 329--330
+Underfull \hbox (badness 10000) in paragraph at lines 326--327
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 331--332
+Underfull \hbox (badness 10000) in paragraph at lines 328--329
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 333--334
+Underfull \hbox (badness 10000) in paragraph at lines 330--331
 
  []
 
 
-Overfull \hbox (0.64673pt too wide) in paragraph at lines 335--336
-\OT1/cmr/m/n/12 MORE EX-PLA-NA-TION HERE ONC AL-GO-RITHM IS WRIT-TEN ABOVE
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 335--336
+Underfull \hbox (badness 10000) in paragraph at lines 332--333
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 341--342
+Underfull \hbox (badness 10000) in paragraph at lines 338--339
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 343--344
+Underfull \hbox (badness 10000) in paragraph at lines 340--341
 
  []
 
-<../plots/basicFPL_100iters.pdf, id=161, 433.62pt x 289.08pt>
+<../plots/basicFPL_100iters.pdf, id=164, 433.62pt x 289.08pt>
 File: ../plots/basicFPL_100iters.pdf Graphic file (type pdf)
 
 <use ../plots/basicFPL_100iters.pdf>
-Package pdftex.def Info: ../plots/basicFPL_100iters.pdf used on input line 349.
+Package pdftex.def Info: ../plots/basicFPL_100iters.pdf used on input line 346.
 
 (pdftex.def)             Requested size: 142.26378pt x 94.8409pt.
 
-Overfull \hbox (13.56306pt too wide) in paragraph at lines 349--350
+Overfull \hbox (13.56306pt too wide) in paragraph at lines 346--347
  [][] 
  []
 
-<../plots/basicFPL_100_200iters.pdf, id=162, 433.62pt x 289.08pt>
+<../plots/basicFPL_100_200iters.pdf, id=165, 433.62pt x 289.08pt>
 File: ../plots/basicFPL_100_200iters.pdf Graphic file (type pdf)
 
 <use ../plots/basicFPL_100_200iters.pdf>
 Package pdftex.def Info: ../plots/basicFPL_100_200iters.pdf used on input line 
-353.
+350.
 (pdftex.def)             Requested size: 142.26378pt x 94.8409pt.
 
-Overfull \hbox (13.56306pt too wide) in paragraph at lines 353--354
+Overfull \hbox (13.56306pt too wide) in paragraph at lines 350--351
  [][] 
  []
 
-<../plots/basicFPL_4000_4100iters.pdf, id=163, 433.62pt x 289.08pt>
+<../plots/basicFPL_4000_4100iters.pdf, id=166, 433.62pt x 289.08pt>
 File: ../plots/basicFPL_4000_4100iters.pdf Graphic file (type pdf)
 
 <use ../plots/basicFPL_4000_4100iters.pdf>
 Package pdftex.def Info: ../plots/basicFPL_4000_4100iters.pdf used on input lin
-e 357.
+e 354.
 (pdftex.def)             Requested size: 142.26378pt x 94.8409pt.
 
-Overfull \hbox (13.56306pt too wide) in paragraph at lines 357--358
+Overfull \hbox (13.56306pt too wide) in paragraph at lines 354--355
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[10]
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 373--374
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 375--376
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 379--380
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 381--382
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 383--384
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 387--388
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 389--390
-
- []
-
-[11 <../plots/basicFPL_100iters.pdf> <../plots/basicFPL_100_200iters.pdf
+[12 <../plots/basicFPL_100iters.pdf> <../plots/basicFPL_100_200iters.pdf
 
 pdfTeX warning: pdflatex (file ../plots/basicFPL_100_200iters.pdf): PDF inclusi
 on: multiple pdfs with page group included in a single page
@@ -518,57 +513,121 @@ on: multiple pdfs with page group included in a single page
 pdfTeX warning: pdflatex (file ../plots/basicFPL_4000_4100iters.pdf): PDF inclu
 sion: multiple pdfs with page group included in a single page
 >]
-Underfull \hbox (badness 10000) in paragraph at lines 395--396
+Underfull \hbox (badness 10000) in paragraph at lines 389--390
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 397--398
+Underfull \hbox (badness 10000) in paragraph at lines 391--392
 
  []
 
-<../plots/stoch_network_opt_paths.pdf, id=292, 433.62pt x 289.08pt>
+<../plots/stoch_network_opt_paths.pdf, id=296, 433.62pt x 289.08pt>
 File: ../plots/stoch_network_opt_paths.pdf Graphic file (type pdf)
 
 <use ../plots/stoch_network_opt_paths.pdf>
 Package pdftex.def Info: ../plots/stoch_network_opt_paths.pdf used on input lin
-e 403.
-(pdftex.def)             Requested size: 142.26378pt x 94.8409pt.
+e 397.
+(pdftex.def)             Requested size: 184.9429pt x 123.29626pt.
 
-Overfull \hbox (13.56306pt too wide) in paragraph at lines 403--404
- [][] 
- []
-
-<../plots/stoch_network_UCB1.pdf, id=293, 433.62pt x 289.08pt>
+<../plots/stoch_network_UCB1.pdf, id=297, 433.62pt x 289.08pt>
 File: ../plots/stoch_network_UCB1.pdf Graphic file (type pdf)
 
 <use ../plots/stoch_network_UCB1.pdf>
-Package pdftex.def Info: ../plots/stoch_network_UCB1.pdf used on input line 407
+Package pdftex.def Info: ../plots/stoch_network_UCB1.pdf used on input line 401
 .
-(pdftex.def)             Requested size: 142.26378pt x 94.8409pt.
+(pdftex.def)             Requested size: 184.9429pt x 123.29626pt.
 
-Overfull \hbox (13.56306pt too wide) in paragraph at lines 407--408
- [][] 
- []
-
-<../plots/stoch_network_FPL.pdf, id=294, 433.62pt x 289.08pt>
+<../plots/stoch_network_FPL.pdf, id=298, 433.62pt x 289.08pt>
 File: ../plots/stoch_network_FPL.pdf Graphic file (type pdf)
 
 <use ../plots/stoch_network_FPL.pdf>
-Package pdftex.def Info: ../plots/stoch_network_FPL.pdf used on input line 411.
+Package pdftex.def Info: ../plots/stoch_network_FPL.pdf used on input line 405.
 
-(pdftex.def)             Requested size: 142.26378pt x 94.8409pt.
+(pdftex.def)             Requested size: 184.9429pt x 123.29626pt.
 
-Overfull \hbox (13.56306pt too wide) in paragraph at lines 411--412
+<../plots/stoch_network_CombLinTS.pdf, id=299, 433.62pt x 289.08pt>
+File: ../plots/stoch_network_CombLinTS.pdf Graphic file (type pdf)
+
+<use ../plots/stoch_network_CombLinTS.pdf>
+Package pdftex.def Info: ../plots/stoch_network_CombLinTS.pdf used on input lin
+e 409.
+(pdftex.def)             Requested size: 184.9429pt x 123.29626pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 418--419
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 422--423
+
+ []
+
+[13] <../plots/path_means1.png, id=303, 1016.79875pt x 314.17375pt>
+File: ../plots/path_means1.png Graphic file (type png)
+
+<use ../plots/path_means1.png>
+Package pdftex.def Info: ../plots/path_means1.png used on input line 428.
+(pdftex.def)             Requested size: 398.33858pt x 123.07855pt.
+
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 428--429
+ [][] 
+ []
+
+<../plots/path_means2.png, id=304, 1015.795pt x 319.1925pt>
+File: ../plots/path_means2.png Graphic file (type png)
+
+<use ../plots/path_means2.png>
+Package pdftex.def Info: ../plots/path_means2.png used on input line 431.
+(pdftex.def)             Requested size: 398.33858pt x 125.16643pt.
+
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 431--432
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 420--421
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 442--443
 
  []
 
-[12 <../plots/stoch_network_opt_paths.pdf> <../plots/stoch_network_UCB1.pdf
+<../plots/path_means3.png, id=305, 1015.795pt x 318.18875pt>
+File: ../plots/path_means3.png Graphic file (type png)
+
+<use ../plots/path_means3.png>
+Package pdftex.def Info: ../plots/path_means3.png used on input line 448.
+(pdftex.def)             Requested size: 398.33858pt x 124.77283pt.
+
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 448--449
+ [][] 
+ []
+
+<../plots/path_means4.png, id=306, 1015.795pt x 318.18875pt>
+File: ../plots/path_means4.png Graphic file (type png)
+
+<use ../plots/path_means4.png>
+Package pdftex.def Info: ../plots/path_means4.png used on input line 451.
+(pdftex.def)             Requested size: 398.33858pt x 124.77283pt.
+
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 451--452
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 463--464
+
+ []
+
+[14 <../plots/stoch_network_opt_paths.pdf> <../plots/stoch_network_UCB1.pdf
 
 pdfTeX warning: pdflatex (file ../plots/stoch_network_UCB1.pdf): PDF inclusion:
  multiple pdfs with page group included in a single page
@@ -576,83 +635,32 @@ pdfTeX warning: pdflatex (file ../plots/stoch_network_UCB1.pdf): PDF inclusion:
 
 pdfTeX warning: pdflatex (file ../plots/stoch_network_FPL.pdf): PDF inclusion: 
 multiple pdfs with page group included in a single page
+> <../plots/stoch_network_CombLinTS.pdf
+
+pdfTeX warning: pdflatex (file ../plots/stoch_network_CombLinTS.pdf): PDF inclu
+sion: multiple pdfs with page group included in a single page
 >]
-Underfull \hbox (badness 10000) in paragraph at lines 424--425
-
- []
-
-<../plots/path_means1.png, id=401, 1016.79875pt x 314.17375pt>
-File: ../plots/path_means1.png Graphic file (type png)
-
-<use ../plots/path_means1.png>
-Package pdftex.def Info: ../plots/path_means1.png used on input line 430.
-(pdftex.def)             Requested size: 398.33858pt x 123.07855pt.
-
-Overfull \hbox (8.33858pt too wide) in paragraph at lines 430--431
- [][] 
- []
-
-<../plots/path_means2.png, id=402, 1015.795pt x 319.1925pt>
-File: ../plots/path_means2.png Graphic file (type png)
-
-<use ../plots/path_means2.png>
-Package pdftex.def Info: ../plots/path_means2.png used on input line 433.
-(pdftex.def)             Requested size: 398.33858pt x 125.16643pt.
-
-Overfull \hbox (8.33858pt too wide) in paragraph at lines 433--434
- [][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 444--445
-
- []
-
-[13 <../plots/path_means1.png> <../plots/path_means2.png>]
-<../plots/path_means3.png, id=407, 1015.795pt x 318.18875pt>
-File: ../plots/path_means3.png Graphic file (type png)
-
-<use ../plots/path_means3.png>
-Package pdftex.def Info: ../plots/path_means3.png used on input line 450.
-(pdftex.def)             Requested size: 398.33858pt x 124.77283pt.
-
-Overfull \hbox (8.33858pt too wide) in paragraph at lines 450--451
- [][] 
- []
-
-<../plots/path_means4.png, id=408, 1015.795pt x 318.18875pt>
-File: ../plots/path_means4.png Graphic file (type png)
-
-<use ../plots/path_means4.png>
-Package pdftex.def Info: ../plots/path_means4.png used on input line 453.
-(pdftex.def)             Requested size: 398.33858pt x 124.77283pt.
-
-Overfull \hbox (8.33858pt too wide) in paragraph at lines 453--454
- [][] 
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 465--466
 
  []
 
-[14 <../plots/path_means3.png> <../plots/path_means4.png>]
+[15 <../plots/path_means1.png> <../plots/path_means2.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 467--468
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 469--470
-
- []
-
-
-Overfull \hbox (102.18974pt too wide) in paragraph at lines 472--497
+Overfull \hbox (102.18974pt too wide) in paragraph at lines 470--495
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 472--497
+Underfull \hbox (badness 10000) in paragraph at lines 470--495
+
+ []
+
+[16 <../plots/path_means3.png> <../plots/path_means4.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 496--497
 
  []
 
@@ -661,77 +669,67 @@ Underfull \hbox (badness 10000) in paragraph at lines 498--499
 
  []
 
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 500--501
-
- []
-
-<../plots/advers_net2_cumul_costs.jpg, id=415, 433.62pt x 289.08pt>
+<../plots/advers_net2_cumul_costs.jpg, id=454, 433.62pt x 289.08pt>
 File: ../plots/advers_net2_cumul_costs.jpg Graphic file (type jpg)
 
 <use ../plots/advers_net2_cumul_costs.jpg>
 Package pdftex.def Info: ../plots/advers_net2_cumul_costs.jpg used on input lin
-e 504.
+e 502.
 (pdftex.def)             Requested size: 284.52756pt x 189.69504pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 509--510
-
- []
-
-[16 <../plots/advers_net2_cumul_costs.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 520--521
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 524--525
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 528--529
-
- []
-
-<../plots/eta_expl_cost.pdf, id=419, 433.62pt x 289.08pt>
-File: ../plots/eta_expl_cost.pdf Graphic file (type pdf)
-
-<use ../plots/eta_expl_cost.pdf>
-Package pdftex.def Info: ../plots/eta_expl_cost.pdf used on input line 534.
-(pdftex.def)             Requested size: 184.9429pt x 123.29626pt.
-
-<../plots/gamma_expl_cost.pdf, id=420, 433.62pt x 289.08pt>
-File: ../plots/gamma_expl_cost.pdf Graphic file (type pdf)
-
-<use ../plots/gamma_expl_cost.pdf>
-Package pdftex.def Info: ../plots/gamma_expl_cost.pdf used on input line 538.
-(pdftex.def)             Requested size: 184.9429pt x 123.29626pt.
-
-<../plots/Bt_expl_cost.pdf, id=421, 433.62pt x 289.08pt>
-File: ../plots/Bt_expl_cost.pdf Graphic file (type pdf)
-
-<use ../plots/Bt_expl_cost.pdf>
-Package pdftex.def Info: ../plots/Bt_expl_cost.pdf used on input line 542.
-(pdftex.def)             Requested size: 184.9429pt x 123.29626pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 549.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 549.
 
-Underfull \hbox (badness 10000) in paragraph at lines 551--552
+Underfull \hbox (badness 10000) in paragraph at lines 507--508
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 553--554
+Underfull \hbox (badness 10000) in paragraph at lines 518--519
 
  []
 
-[18 <../plots/eta_expl_cost.pdf> <../plots/gamma_expl_cost.pdf
+
+Underfull \hbox (badness 10000) in paragraph at lines 522--523
+
+ []
+
+[18 <../plots/advers_net2_cumul_costs.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 526--527
+
+ []
+
+<../plots/eta_expl_cost.pdf, id=462, 433.62pt x 289.08pt>
+File: ../plots/eta_expl_cost.pdf Graphic file (type pdf)
+
+<use ../plots/eta_expl_cost.pdf>
+Package pdftex.def Info: ../plots/eta_expl_cost.pdf used on input line 532.
+(pdftex.def)             Requested size: 184.9429pt x 123.29626pt.
+
+<../plots/gamma_expl_cost.pdf, id=463, 433.62pt x 289.08pt>
+File: ../plots/gamma_expl_cost.pdf Graphic file (type pdf)
+
+<use ../plots/gamma_expl_cost.pdf>
+Package pdftex.def Info: ../plots/gamma_expl_cost.pdf used on input line 536.
+(pdftex.def)             Requested size: 184.9429pt x 123.29626pt.
+
+<../plots/Bt_expl_cost.pdf, id=464, 433.62pt x 289.08pt>
+File: ../plots/Bt_expl_cost.pdf Graphic file (type pdf)
+
+<use ../plots/Bt_expl_cost.pdf>
+Package pdftex.def Info: ../plots/Bt_expl_cost.pdf used on input line 540.
+(pdftex.def)             Requested size: 184.9429pt x 123.29626pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 547.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 547.
+
+Underfull \hbox (badness 10000) in paragraph at lines 549--550
+
+ []
+
+[19 <../plots/eta_expl_cost.pdf> <../plots/gamma_expl_cost.pdf
 
 pdfTeX warning: pdflatex (file ../plots/gamma_expl_cost.pdf): PDF inclusion: mu
 ltiple pdfs with page group included in a single page
@@ -740,71 +738,72 @@ ltiple pdfs with page group included in a single page
 pdfTeX warning: pdflatex (file ../plots/Bt_expl_cost.pdf): PDF inclusion: multi
 ple pdfs with page group included in a single page
 >]
-Underfull \hbox (badness 10000) in paragraph at lines 555--556
+Underfull \hbox (badness 10000) in paragraph at lines 551--552
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 560--561
+Underfull \hbox (badness 10000) in paragraph at lines 553--554
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 566--566
+Underfull \hbox (badness 10000) in paragraph at lines 558--559
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 564--564
 []\OT1/cmr/m/n/12 4000-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 566--566
+Underfull \hbox (badness 10000) in paragraph at lines 564--564
 []\OT1/cmr/m/n/12 5000-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 566--566
+Underfull \hbox (badness 10000) in paragraph at lines 564--564
 []\OT1/cmr/m/n/12 9000-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 566--567
+Underfull \hbox (badness 10000) in paragraph at lines 564--565
 []\OT1/cmr/m/n/12 total
  []
 
 
-Overfull \hbox (0.3787pt too wide) in paragraph at lines 562--572
+Overfull \hbox (0.3787pt too wide) in paragraph at lines 560--570
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 562--572
+Underfull \hbox (badness 10000) in paragraph at lines 560--570
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 573--574
+Underfull \hbox (badness 10000) in paragraph at lines 571--572
 
  []
 
-<../plots/changing_gamma_cumul_cost.jpg, id=517, 433.62pt x 289.08pt>
+[20] <../plots/changing_gamma_cumul_cost.jpg, id=559, 433.62pt x 289.08pt>
 File: ../plots/changing_gamma_cumul_cost.jpg Graphic file (type jpg)
 
 <use ../plots/changing_gamma_cumul_cost.jpg>
 Package pdftex.def Info: ../plots/changing_gamma_cumul_cost.jpg used on input l
-ine 579.
+ine 577.
 (pdftex.def)             Requested size: 284.52756pt x 189.69504pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[19] [20 <../plots/changing_gamma_cumul_cost.jpg>] (./report.aux)
+ [21 <../plots/changing_gamma_cumul_cost.jpg>] (./report.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 2981 strings out of 494953
- 48745 string characters out of 6180977
+ 2986 strings out of 494953
+ 48935 string characters out of 6180977
  111961 words of memory out of 5000000
- 6232 multiletter control sequences out of 15000+600000
+ 6236 multiletter control sequences out of 15000+600000
  12552 words of font info for 43 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  42i,9n,40p,952b,452s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -823,10 +822,10 @@ cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on report.pdf (21 pages, 4381866 bytes).
+Output written on report.pdf (22 pages, 5617448 bytes).
 PDF statistics:
- 575 PDF objects out of 1000 (max. 8388607)
- 160 compressed objects within 2 object streams
+ 614 PDF objects out of 1000 (max. 8388607)
+ 167 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 91 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 96 words of extra memory for PDF output out of 10000 (max. 10000000)
 

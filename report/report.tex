@@ -168,6 +168,8 @@ Another prominent problem to solve is the least cost path in a network, such as 
 
 \section{Algorithms}
 
+The algorithms shown below are based on the following framework. There is a set of $L$ options (known as the \textit{ground set}) that can be selected to form a solution at each stage. There is a set of feasible solutions, $\Phi$, which contains combinations of the ground set. For each option there is a distribution $P$ from which the cost or reward is generated at each iteration. 
+
 \subsection{CombUCB1}
 
 One of the most well-known algorithms for multi-armed bandit problems is UCB1. This has been adapted to the combinatorial setting by Kveton et al [1], who developed CombUCB1. After each iteration the algorithm calculates a confidence bound around the empirical mean reward/cost of each element. These confidence bounds are then used in the combinatorial optimization problem, the solution of which is the chosen play for the next round. The more observations that are available of an element, the tighter the confidence bound around the expeceted value. Loosely speaking, relatively unobserved items will have larger confidence bounds so they will be explored until there is more confidence in their expected value.\\
@@ -220,12 +222,11 @@ This assumes that one is able to initialize by choosing to observe each edge at 
 
 Note that the algorithm is computationally efficient, provided that the combinatorial optimization can be solved efficiently. All other operations are polynomial in L and K.\\
 
-TO DO - MAKE SURE EVERYTHING IS DEFINED PROPERLY EARLIER ON
 
 
 \subsection{FPL-TRiX}
 
-FPL-TRiX is a Follow the Perturbed Leader algorithm with TRuncated perturbations and Implicit eXploration. In the algorithm, each time an option is observed an amount is added on to a cumulative total for that particular option. This amount is based on the cost of the observed edge at that iteration and the proportion of times that the options has been selected in past iterations. This cumulative total is then used in the combinatorial optimization problem at the next iteration. The fact that the cumulative total increases only for the observed options means that eventually the total of the lower cost edges will always increase above those for the higher cost edges. Thus the higher cost edges will always eventually be explored again. This continued exploration should allow the algorithm to adapt more quickly if the situation changes, i.e. in an adversarial framework.
+FPL-TRiX is a Follow the Perturbed Leader algorithm with TRuncated perturbations and Implicit eXploration. In the algorithm, each time an option is observed an amount is added on to a cumulative total for that particular option. This amount is based on the cost of the observed edge at that iteration and the proportion of times that the options has been selected in past iterations. This cumulative total is then used in the combinatorial optimization problem at the next iteration. The fact that the cumulative total increases only for the observed options means that eventually the total of the lower cost edges will always increase above those for the higher cost edges. Thus the higher cost edges will always eventually be explored again. This continued exploration should allow the algorithm to adapt more quickly if the situation changes, i.e. in an adversarial framework.\\
 
 The algorithm is set out formally below.
 
@@ -275,10 +276,6 @@ Update $\mathbf{\hat{L}}_t$:
 \subsection{CombLinTS}
 
 
-Others
-
-
-Mathematical results (bounds etc)	
 
 
 \pagebreak
@@ -296,7 +293,7 @@ For some initial insight into how the algorithms work in practice we can set up 
 We start by setting L = 20, K = 5 and set the means as incrementally increasing values from 1/20 for the first element to 1 for the last element (so they are 1/20, 2/20, ..., 18/20, 19/20, 1). The game is to maximise the weights observed at each round. Clearly the optimal elements to play at each round are the last 5 elements as they have the highest probability of being drawn as 1. Let us observe how the algorithms explore the different options at different stages.\\
 
 
-\noindent \textbf{UCB1}\\
+\noindent \textbf{CombUCB1}\\
 
 
 
@@ -332,7 +329,7 @@ The algorithm performs very well at finding a near optimal solution.\\
 
 \noindent \textbf{Adapted-FPL-TRiX}\\
 
-Figure XXX shows the corresponding charts for FPL-TRiX but adapted to find a maximum solution as opposed to a minimum solution. NEED MORE EXPLANATION HERE ONC ALGORITHM IS WRITTEN ABOVE In fact, by finding a maximum, this misses part of the essence of FPL-TRiX, which is that it adapts well in adversarial cases by keeping more of an open mind about trying the different options even once it has started to recognise the optimal solution. However, even though this is not exactly FPL-TRiX, it is interesting to include here as, with a bit of parameter tuning, it performs incredibly well in this situation. The reward and regret are:\\
+Figure XXX shows the corresponding charts for FPL-TRiX but adapted to find a maximum solution as opposed to a minimum solution. In fact, by making this change to find a maximum the essence of FPL-TRiX is missed, which is that it adapts well in adversarial cases by keeping more of an open mind about trying the different options even once it has started to recognise the optimal solution. However, even though this is not exactly FPL-TRiX, it is interesting to include here as, with a bit of parameter tuning, it performs incredibly well in this situation. The reward and regret are:\\
 
 Optimal path reward = 42,399
 
@@ -363,11 +360,6 @@ Thus the algorithm outperforms CombUCB1. If we think of this slightly modified F
 
 
 
-DO WE WANT TO ALSO SHOW WHAT THE MATHEMATICAL BOUNDS ARE HERE???
-
-Graphs showing how regret changes as inputs change (K, L, T etc)
-
-Include adversarial case here?
 
 
 \pagebreak
@@ -400,19 +392,23 @@ Perhaps surprisingly, FPL-TRiX is able to significantly outperform CombUCB1 in t
 
 \begin{figure}[h!]
 \centering
-\begin{subfigure}{.33\textwidth}
+\begin{subfigure}{.49\textwidth}
   \centering
-  \includegraphics[width=50mm]{../plots/stoch_network_opt_paths.pdf}
+  \includegraphics[width=65mm]{../plots/stoch_network_opt_paths.pdf}
 \end{subfigure}%
-\begin{subfigure}{.33\textwidth}
+\begin{subfigure}{.49\textwidth}
   \centering
-  \includegraphics[width=50mm]{../plots/stoch_network_UCB1.pdf}
+  \includegraphics[width=65mm]{../plots/stoch_network_UCB1.pdf}
 \end{subfigure}
-\begin{subfigure}{.33\textwidth}
+\begin{subfigure}{.49\textwidth}
   \centering
-  \includegraphics[width=50mm]{../plots/stoch_network_FPL.pdf}
+  \includegraphics[width=65mm]{../plots/stoch_network_FPL.pdf}
 \end{subfigure}
-\caption{Optimal paths, CombUCB1 chosen paths and FPL-TRiX chosen paths}
+\begin{subfigure}{.49\textwidth}
+  \centering
+  \includegraphics[width=65mm]{../plots/stoch_network_CombLinTS.pdf}
+\end{subfigure}
+\caption{Optimal paths, CombUCB1 chosen paths, FPL-TRiX and CombLinTS chosen paths}
 \label{fig:ullm-particle}
 \end{figure}
 
@@ -475,25 +471,25 @@ The following table shows the total cost of each algorithm for each of the netwo
  \hline
  \multicolumn{5}{|c|}{Costs of each algorithm over each adversarial network} \\
  \hline
- Network                    & Optimal Path  & CombUCB1  & FPL-TRiX  & TS??  \\
+ Network                    & Optimal Path  & CombUCB1  & FPL-TRiX  & CombLinTS   \\
  \hline
- Adversarial network 1      &               &           &           &       \\
-  - total cost              & 3,684         & 6,196     & 7,652     &       \\
-  - first 1000 iterations   & 450           & 750       & 662       &       \\
-  - middle 1000 iterations  & 367           & 845       & 892       &       \\
-  - final 1000 iterations   & 286           & 452       & 773       &       \\
+ Adversarial network 1      &               &           &           &             \\
+  - total cost              & 4,711         & 7,228     & 9,313     & 5,907       \\
+  - first 1000 iterations   & 450           & 750       & 673       & 482         \\
+  - middle 1000 iterations  & 472           & 984       & 1,071     & 1,488       \\
+  - final 1000 iterations   & 492           & 667       & 1,075     & 494         \\
  \hline
- Adversarial network 2      &               &           &           &       \\
-  - total cost              & 7,244         & 12,447    & 11,890    &       \\
-  - first 1000 iterations   & 999           & 1,803     & 1,321     &       \\
-  - middle 1000 iterations  & 723           & 1,087     & 1,142     &       \\
-  - final 1000 iterations   & 450           & 457       & 1,079     &       \\
+ Adversarial network 2      &               &           &           &             \\
+  - total cost              & 7,244         & 12,447    & 11,890    & 10,845      \\
+  - first 1000 iterations   & 999           & 1,803     & 1,321     & 1,485       \\
+  - middle 1000 iterations  & 723           & 1,087     & 1,142     & 1,024       \\
+  - final 1000 iterations   & 450           & 457       & 1,079     & 997         \\
  \hline
- Adversarial network 3      &               &           &           &       \\
-  - total cost              & 3,844         & 5,482     & 6,262     &       \\
-  - first 1000 iterations   & 503           & 809       & 1,007     &       \\
-  - middle 1000 iterations  & 178           & 351       & 296       &       \\
-  - final 1000 iterations   & 781           & 964       & 1,245     &       \\
+ Adversarial network 3      &               &           &           &             \\
+  - total cost              & 3,844         & 5,482     & 6,262     & 9,489       \\
+  - first 1000 iterations   & 503           & 809       & 1,007     & 1,338       \\
+  - middle 1000 iterations  & 178           & 351       & 296       & 406         \\
+  - final 1000 iterations   & 781           & 964       & 1,245     & 1,594       \\
  \hline
 \end{tabular}\\
 
