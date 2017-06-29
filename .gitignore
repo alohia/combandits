@@ -1,2 +1,4 @@
 .ipynb_checkpoints/
 combenv/*
+stoch_path_means
+stoch_weights
