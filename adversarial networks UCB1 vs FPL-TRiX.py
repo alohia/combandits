@@ -13,7 +13,7 @@ import scipy.stats as stats
 truncnorm = stats.truncnorm
 truncexp = stats.truncexpon
 from tqdm import tqdm
-
+import pickle
 ### Set parameters
 V = 10
 L = V*V
@@ -41,7 +41,7 @@ def impurity(path_matrix):
 ##################################################################
 ### setup network which changes after a certain length of time ###
 ##################################################################
-
+pickle.dump(path_means2, open("adv_net1_pm2", "wb"))
 ### set mean of each path
 diag_zero = np.ones(L).reshape(V, V) - np.diag(np.ones(V))
 
@@ -482,12 +482,15 @@ for t in tqdm(range(0, iters, 10)):
 
 x_axis = list(range(0, iters, 10))
 
+adversarial_network2_TS_cumul_cost = pickle.load(open("net2_clts_cost", "rb"))
+
 plt.plot(x_axis, adversarial_network2_UCB_cumul_cost, linewidth = 2.5, c = (1, 0.5, 0.0), alpha = 1, label = "CombUCB1")
 plt.plot(x_axis, adversarial_network2_FPL_cumul_cost, linewidth = 2.5, c = (0.0, 0.5, 1), alpha = 1, label = "FPL-TRiX")
+plt.plot(x_axis, adversarial_network2_TS_cumul_cost, linewidth = 2.5, c = (0.0, 1, 0), alpha = 1, label = "CombLinTS")
 plt.xlabel("iteration")
 plt.ylabel("cumulative cost")
 plt.title("Adversarial network 2 cumulative cost")
-plt.legend(ncol = 2)
+plt.legend(ncol = 1)
 plt.savefig('advers_net2_cumul_costs.jpg')
 
 

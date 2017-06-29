@@ -143,7 +143,7 @@ for t in tqdm(range(iters)):
         v = unvisited[i]
         unvisited.pop(i)
         for u in range(V):
-            if distances[u] > distances[v] + path_means2[v, u]:
+            if distances[u] > distances[v] + path_means[v, u]:
                 distances[u] = distances[v] + path_means[v, u]
                 paths[u] = paths[v][:]
                 paths[u].append(u)
