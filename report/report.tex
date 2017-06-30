@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% University Assignment Title Page 
+% University Assignment Title Page
 % LaTeX Template
 % Version 1.0 (27/12/12)
 %
@@ -11,17 +11,17 @@
 %
 % License:
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
-% 
-% Instructions for using this template:
-% This title page is capable of being compiled as is. This is not useful for 
-% including it in another document. To do this, you have two options: 
 %
-% 1) Copy/paste everything between \begin{document} and \end{document} 
-% starting at \begin{titlepage} and paste this into another LaTeX file where you 
+% Instructions for using this template:
+% This title page is capable of being compiled as is. This is not useful for
+% including it in another document. To do this, you have two options:
+%
+% 1) Copy/paste everything between \begin{document} and \end{document}
+% starting at \begin{titlepage} and paste this into another LaTeX file where you
 % want your title page.
 % OR
-% 2) Remove everything outside the \begin{titlepage} and \end{titlepage} and 
-% move this file to the same directory as the LaTeX file you wish to add it to. 
+% 2) Remove everything outside the \begin{titlepage} and \end{titlepage} and
+% move this file to the same directory as the LaTeX file you wish to add it to.
 % Then add \input{./title_page_1.tex} to your LaTeX file where you want your
 % title page.
 %
@@ -44,7 +44,7 @@
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
 
 \center % Center everything on the page
- 
+
 %----------------------------------------------------------------------------------------
 %	HEADING SECTIONS
 %----------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@
 { \huge \bfseries Combinatorial Bandit}\\[0.4cm] % Title of your document
 { \huge \bfseries Algorithms in Practice}\\[0.4cm]
 \HRule \\[1.5cm]
- 
+
 %----------------------------------------------------------------------------------------
 %	AUTHOR SECTION
 %----------------------------------------------------------------------------------------
@@ -98,7 +98,7 @@ Akhil \textsc{Lohia}\\[3cm] % Akhil's name
 %----------------------------------------------------------------------------------------
 
 %\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
- 
+
 %----------------------------------------------------------------------------------------
 
 \vfill % Fill the rest of the page with whitespace
@@ -113,9 +113,9 @@ Akhil \textsc{Lohia}\\[3cm] % Akhil's name
 %\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
 
 
-There has recently been a lot of interest in online learning algorithms where limited feedback is received at each stage of the process, known as bandit problems. Such algorithms generally choose a subset of available options to 'play' at each round. For the options chosen, some stochastic reward (or cost) is returned. In a semi-bandit situation, the reward is observed for each option which is played. In a full-bandit scenario, only the total reward is observed. A lot of practical problems also contain a combinatorial element to them, whereby a combinatorial problem needs to be solved using the feedback observed.\\
+There has recently been a lot of interest in online learning problems where limited feedback is received at each stage of the process, known as bandit problems. The algorithms to solve these problems generally choose a subset of available options to \emph{play} at each round. For the options chosen, some stochastic reward (or cost) is observed. In a semi-bandit situation, the reward is observed for each option which is played. In a full-bandit scenario, only the total reward for all chosen options is observed. Several such practical problems also contain a combinatorial element to them, whereby a combinatorial problem needs to be solved in each round using the partial feedback observed.\\
 
-Recent literature has proposed many different algorithms and approaches for these bandit problems. The literature is also full of mathematical proofs for bounds on regret risk (i.e. the difference between a chosen solution and the optimal solution). However, there is relatively little information on how these algorithms perform in practice. This paper intends to explore the performance of some of the proposed approaches in a more practical setting. 
+Recent literature has proposed many different algorithms and approaches for these bandit problems. The literature is also full of mathematical proofs for bounds on regret risk (i.e., the difference between a chosen solution and the optimal solution). However, there is relatively little information on how these algorithms perform in practice under different scenarios. This project intends to explore the performance of some of the proposed approaches in a more practical setting.
 
 \pagebreak
 
@@ -136,6 +136,8 @@ The acknowledgments and the people to thank go here
 %----------------------------------------------------------------------------------------
 
 \tableofcontents % Prints the main table of contents
+\listoffigures
+\listoftables
 
 \pagebreak
 
@@ -147,17 +149,18 @@ The acknowledgments and the people to thank go here
 
 \subsection{Online learning}
 
-In the online learning environment, a 'player' has a selection of options that they can choose from. Once an option is selected the environment provides some cost or reward feedback. The feedback may provide information on all of the available options (i.e. full-information), on only the selected options (semi-bandit) or perhaps only the total of the chosen options (full-bandit). The player then has a decision whether to continue with the selected option or to try something different. It is usually a good idea to explore the different options available before exploiting the best ones. There has recently been a lot of interest in developing strategies for addressing this exploration vs exploitation.\\
+Online learning is a class of machine learning problems where data becomes available sequentially and is used to update the best predictor for future data at each step. This is in contrast to the general approach towards learning problems where the best generator is learned from the entire training dataset at once.\\
+In the online learning environment, a `player' has a selection of options that they can choose from. Once an option is selected the environment provides some cost or reward feedback. The feedback may provide information on all of the available options (i.e., full-information), on only the selected options (semi-bandit) or perhaps only the aggregate of the chosen options (full-bandit). The player then has a decision in the next round, whether to continue with the option chosen in the previous round or to try/explore something different. It is usually a good idea to explore the different options available before exploiting the ones which appear to be the best at the current level of information. There has recently been a lot of interest in developing algorithmic strategies for addressing this exploration vs exploitation trade-off to achieve most efficient results.\\
 
-In the simplest scenario, the feedback received is \textbf{deterministic}. In this case if one can explore all of the options available then the full environment is known and there is know more learning needed. A more difficult problem is when the feedback is instead \textbf{stochastic} in nature. At each iteration some feedback on the chosen option provides some further insight into the environment, but the actual outcome will never be known for certain. One can try to figure out the best option at each iteration in order to reduce/maximise the expected cost/reward. Various algorithms have been proposed for the stochastic situation which allow one to place an upper bound on the "regret" (or sometimes Bayesian regret) of the system, where regret is defined as the difference in cost/reward between the chosen options and the optimal option.\\
+In the simplest scenario, the feedback received from all available options is \textbf{deterministic}, i.e., the reward from a particular option remains the same in every round. Hence, in this case, as long as the total number of options is not intractable, if one can explore all of the options available then the full environment is known and there is no more learning needed. One can precisely find the optimal choice to play. A more difficult problem is when the feedback is instead \textbf{stochastic} in nature. In this scenario, an unknown reward distribution is associated with each option. The observed rewards in each round are realizations of these distributions and this can lead to a significant variation in observations. At each iteration, some feedback on the chosen option provides further insight into the environment, but the actual outcome can never be known with certainty due to the probabilistic nature of the rewards. The player can try to figure out the best option at each iteration in order to reduce/maximize the expected cost/reward. Various algorithms have been proposed for the stochastic situation which allow one to place an upper bound on the \emph{regret} (or sometimes Bayesian regret) of the system, where regret is defined as the difference in cost/reward between the chosen options and the optimal option.\\
 
-An even more challenging scenario is when the costs/rewards are \textbf{adversarial}. This situation has stochastically drawn feedback from the envirnoment, but the distributions which the feedback is drawn from is not necessarily the same at each iteration. Amazingly, there are algorithms which, given certain constraints on the environment, can still provide upper bounds on the regret risk. These algorithms keep up their exploration aspect in order to adapt to new optimal solutions arising as the situation changes.\\
+An even more challenging scenario is when the costs/rewards are \textbf{adversarial}. This situation has stochastically drawn feedback from the environment, but the distributions from which the feedback is drawn are not necessarily the same at each iteration. Amazingly, there are algorithms which, given certain constraints on the environment, can still provide upper bounds on the regret risk. These algorithms keep up their exploration aspect in order to adapt to new optimal solutions arising as the situation changes. Hence, the trade-off between exploitation and exploration is pretty evident in order to be flexible enough to adapt to changing scenarios.\\
 
-To complicate matters, sometimes the problem to be tackled has a combinatorial element to it, whereby the options to play are chosen subject to satisfying a combiatorial problem. The algorithms developed to combat such a problem therefore need be able to include what is commonly referred to as an "optimization oracle". This can add time and space complexity, but provided the optimization oracle is efficient the algorithms are in general still efficient.\\
+To complicate matters, sometimes the problem to be tackled has a combinatorial element to it. This refers to a problem whereby the options to play are chosen subject to satisfying a combinatorial constraint. The algorithms developed to combat such a problem therefore need be able to include what is commonly referred to as an ``optimization oracle". This can add time and space complexity, but provided the optimization oracle is efficient, the algorithms are in general still efficient.\\
 
-To provide some motivation to studying such problems, there are various real-world scenarios which fit into the framework outlined above. Perhaps the widest use of online bandit algorithms is in website layout. In particular when placing adverts or recommendations on a website. The website provider or marketer has an array of items which they can only use a subset of at any given time. Once they choose a subset to show to customers they receive feedback on the number of times an advert or recommendation was successful. At the next stage they can then either try some of the other adverts/recommendations or stick with the same ones. This problem can become more combinatorial when there are further restrictions places on the available options. For example, adverts of different sizes may have to fit onto a website of particular dimensions, or recommendations may be subject to being less than a total cost of the recommendations.\\
+To provide some motivation for studying such problems, there are various real-world scenarios which fit into the framework outlined above. Perhaps the widest use of online bandit algorithms is in website layout. In particular, the placement of adverts or recommendations on a website. The website provider or advertiser has an array of items from which they can only use a subset at any given time. Once they choose a subset to show to customers they receive feedback on the number of times an advert or recommendation was successful. In the next round, they can then either try some of the other adverts/recommendations or stick with the same ones which were quite successful. This problem can become more combinatorial when there are further restrictions placed on the available options. For example, adverts of different sizes may have to fit onto a website of particular dimensions, or recommendations may be subject to being less than a total stipulated budget.\\
 
-Another prominent problem to solve is the least cost path in a network, such as a communications network or a road network. The cost of each section of each path may depend on the amount of traffic at that point, making the costs non-deterministic. Furthermore, traffic may generally be heavier at certain periods meaning that the expected costs will change over time, giving rise to an adversarial combinatorial bandit problem.\\
+Another prominent problem that is extensively studied is finding the least cost path in a network, such as a communications network or a road network. The cost of every section of each path may depend on the amount of traffic on that path segment, making the costs non-deterministic. Furthermore, traffic may generally be heavier at certain periods meaning that the expected costs will change over time, giving rise to an adversarial combinatorial bandit problem.\\
 
 
 \pagebreak
@@ -168,11 +171,12 @@ Another prominent problem to solve is the least cost path in a network, such as 
 
 \section{Algorithms}
 
-The algorithms shown below are based on the following framework. There is a set of $L$ options (known as the \textit{ground set}) that can be selected to form a solution at each stage. There is a set of feasible solutions, $\Phi$, which contains combinations of the ground set. For each option there is a distribution $P$ from which the cost or reward is generated at each iteration. 
+A stochastic combinatorial semi-bandit is an online learning problem where at each step a learning agent chooses a subset of ground items subject to combinatorial constraints, and then observes stochastic weights of these items and receives their sum as a payoff.\\
+The algorithms shown below are based on the following framework:\\There is a set of $L$ options (known as the \textit{ground set}) that can be selected to form a solution at each stage. There is a set of feasible solutions, $\Phi$, which contains combinations of the ground set. For each option there is a distribution $P$ from which the cost or reward is generated at each iteration.
 
 \subsection{CombUCB1}
 
-One of the most well-known algorithms for multi-armed bandit problems is UCB1. This has been adapted to the combinatorial setting by Kveton et al [1], who developed CombUCB1. After each iteration the algorithm calculates a confidence bound around the empirical mean reward/cost of each element. These confidence bounds are then used in the combinatorial optimization problem, the solution of which is the chosen play for the next round. The more observations that are available of an element, the tighter the confidence bound around the expeceted value. Loosely speaking, relatively unobserved items will have larger confidence bounds so they will be explored until there is more confidence in their expected value.\\
+One of the most well-known algorithms for multi-armed bandit problems is UCB1. This has been adapted to the combinatorial setting by Kveton et al [1], who developed CombUCB1. After each iteration the algorithm calculates a confidence bound around the empirical mean reward/cost of each element. These confidence bounds are then used in the combinatorial optimization problem, the solution of which is the chosen play for the next round. The more observations that are available of an element, the tighter the confidence bound around the expected value. Loosely speaking, relatively unobserved items will have larger confidence bounds so they will be explored until there is more confidence in their expected value.\\
 
 The confidence intervals at time $t$ are calculated as:
 
@@ -248,7 +252,7 @@ $n_0(e) \leftarrow 1$ $\forall$ $e \in E$\\
 
 \noindent \textit{For all t in 1,...,T}:
 
-Draw perturbation vector $\mathbf{Z}_t$ with each component drawn from the exponential distributions truncated at $B_t$\\ 
+Draw perturbation vector $\mathbf{Z}_t$ with each component drawn from the exponential distributions truncated at $B_t$\\
 
 Solve the optimization problem:
 
@@ -466,32 +470,35 @@ The idea of this adversarial case is that it represents gradual shifts over time
 
 The following table shows the total cost of each algorithm for each of the networks. It also shows the cost for the first 1,000 iterations, the middle 1,000 (when networks 1 and 2 shift) and the last 1,000 to show how each algorithm performs at the different stages.\\
 
-
-\begin{tabular}{ |p{4.5cm}||p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|  }
+\begin{table}[h]
+\begin{tabular}{ |p{3.5cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
  \hline
  \multicolumn{5}{|c|}{Costs of each algorithm over each adversarial network} \\
  \hline
  Network                    & Optimal Path  & CombUCB1  & FPL-TRiX  & CombLinTS   \\
  \hline
- Adversarial network 1      &               &           &           &             \\
+ Adversarial 1      &               &           &           &             \\
   - total cost              & 4,711         & 7,228     & 9,313     & 5,907       \\
-  - first 1000 iterations   & 450           & 750       & 673       & 482         \\
-  - middle 1000 iterations  & 472           & 984       & 1,071     & 1,488       \\
-  - final 1000 iterations   & 492           & 667       & 1,075     & 494         \\
+  - first 1000 iters.   & 450           & 750       & 673       & 482         \\
+  - middle 1000 iters.  & 472           & 984       & 1,071     & 1,488       \\
+  - final 1000 iters.   & 492           & 667       & 1,075     & 494         \\
  \hline
- Adversarial network 2      &               &           &           &             \\
+ Adversarial 2      &               &           &           &             \\
   - total cost              & 7,244         & 12,447    & 11,890    & 10,845      \\
-  - first 1000 iterations   & 999           & 1,803     & 1,321     & 1,485       \\
-  - middle 1000 iterations  & 723           & 1,087     & 1,142     & 1,024       \\
-  - final 1000 iterations   & 450           & 457       & 1,079     & 997         \\
+  - first 1000 iters.   & 999           & 1,803     & 1,321     & 1,485       \\
+  - middle 1000 iters.  & 723           & 1,087     & 1,142     & 1,024       \\
+  - final 1000 iters.   & 450           & 457       & 1,079     & 997         \\
  \hline
- Adversarial network 3      &               &           &           &             \\
+ Adversarial 3      &               &           &           &             \\
   - total cost              & 3,844         & 5,482     & 6,262     & 9,489       \\
-  - first 1000 iterations   & 503           & 809       & 1,007     & 1,338       \\
-  - middle 1000 iterations  & 178           & 351       & 296       & 406         \\
-  - final 1000 iterations   & 781           & 964       & 1,245     & 1,594       \\
+  - first 1000 iters.   & 503           & 809       & 1,007     & 1,338       \\
+  - middle 1000 iters.  & 178           & 351       & 296       & 406         \\
+  - final 1000 iters.   & 781           & 964       & 1,245     & 1,594       \\
  \hline
-\end{tabular}\\
+\end{tabular}
+\caption{Costs}
+\end{table}
+
 
 In the first adversarial network FPL-TRiX is quicker to identify the long optimal path at the beginning (similar to the result in the stochastic setting). Both algorithms move towards the optimal path in the second phase, but CombUCB1 explores less in this stage which ultimately leads to it returning a lower total cost.\\
 
@@ -557,7 +564,8 @@ Testing out this idea in the adversarial cases previously discussed, however, ba
 
 Given that, in practice, the $B_t$ does not have a clearly observable effect on the outcome of FPL-TRiX in an adversarial network, perhaps allowing some of the other parameters to vary could yield better results. Testing the cost at different periods with different $\gamma$ parameters yields the following:\\
 
-\begin{tabular}{ |p{3cm}||p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|  }
+\begin{table}[h]
+\begin{tabular}{ |p{3cm}||p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.2cm}|  }
  \hline
  \multicolumn{6}{|c|}{Costs at different periods for differnt $\gamma$ parameters}  \\
  \hline
@@ -566,7 +574,9 @@ Given that, in practice, the $B_t$ does not have a clearly observable effect on 
  $\gamma=0.01$        & 694     & 626       & 1,266     & 821         & 8,397       \\
  $\gamma=0.1$         & 725     & 716       & 1,037     & 699         & 7,735       \\
  \hline
-\end{tabular}\\
+\end{tabular}
+\caption{$\gamma$ costs}
+\end{table}
 
 The lower $\gamma$ parameter provides the best results in the early stages but then once the system changes the higher $\gamma$ parameter yields better results. So can changing the $\gamma$ parameter over time reduce the total cost returned? It seems like a parameter of 0.01 performs best at first and then changing to 0.1 is better for the second stage. However, in reality simply changing the parameter in this way does not lead to the best performance here. The behaviour over time of each scenario can be observed in figure XXX.\\
 
@@ -585,6 +595,8 @@ The lower $\gamma$ parameter provides the best results in the early stages but t
 The total cost seems to be largely determined by the settings at the initial stages. Although changing the parameter when the adversarial situation changes does appear to be advantageous compared to keeping it at 0.01, it still lags the performance when gamma is set to 0.1 for the entire time. It does, however, suggest that using some sort of changing $\gamma$ parameter could be beneficial in some cases, and indeed in this case the changing parameter model is lowest cost after around 6,000 iterations.
 
 \pagebreak
+
+\section{Conclusion}
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
