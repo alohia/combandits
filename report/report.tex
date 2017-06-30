@@ -36,6 +36,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage[usenames, dvipsnames]{color}
+\usepackage{natbib}
 
 \begin{document}
 
@@ -172,11 +173,11 @@ Another prominent problem that is extensively studied is finding the least cost 
 \section{Algorithms}
 
 A stochastic combinatorial semi-bandit is an online learning problem where at each step a learning agent chooses a subset of ground items subject to combinatorial constraints, and then observes stochastic weights of these items and receives their sum as a payoff.\\
-The algorithms shown below are based on the following framework:\\There is a set of $L$ options (known as the \textit{ground set}) that can be selected to form a solution at each stage. There is a set of feasible solutions, $\Phi$, which contains combinations of the ground set. For each option there is a distribution $P$ from which the cost or reward is generated at each iteration.
+The algorithms shown below are based on the following framework:\\There is a set of $L$ options (known as the \emph{ground set}) that can be selected to form a solution at each stage. There is a set of feasible solutions, $\Phi$, which contains combinations of the ground set. For each option there is a distribution $P$ from which the cost or reward is generated at each iteration.
 
 \subsection{CombUCB1}
 
-One of the most well-known algorithms for multi-armed bandit problems is UCB1. This has been adapted to the combinatorial setting by Kveton et al [1], who developed CombUCB1. After each iteration the algorithm calculates a confidence bound around the empirical mean reward/cost of each element. These confidence bounds are then used in the combinatorial optimization problem, the solution of which is the chosen play for the next round. The more observations that are available of an element, the tighter the confidence bound around the expected value. Loosely speaking, relatively unobserved items will have larger confidence bounds so they will be explored until there is more confidence in their expected value.\\
+One of the most well-known algorithms for multi-armed bandit problems is UCB1. This has been adapted to the combinatorial setting by \cite{kveton2015tight}, who developed CombUCB1. After each iteration the algorithm calculates a confidence bound around the empirical mean reward/cost of each element. These confidence bounds are then used in the combinatorial optimization problem, the solution of which is the chosen play for the next round. The more observations that are available of an element, the tighter the confidence bound around the expected value. Loosely speaking, relatively unobserved items will have larger confidence bounds so they will be explored until there is more confidence in their expected value.\\
 
 The confidence intervals at time $t$ are calculated as:
 
@@ -198,7 +199,7 @@ $\mathbf{\hat{w}}_0 \leftarrow$ make one observation of each edge
 
 $n_0(e) \leftarrow 1$ $\forall$ $e \in E$\\
 
-\noindent \textit{For all t in 1,...,T}:
+\noindent \textit{For all t in 1,\ldots,T}:
 
 Compute confidence intervals for each edge:
 
@@ -207,6 +208,8 @@ Compute confidence intervals for each edge:
 Solve the optimization problem:
 
 \indent \indent $A_t \leftarrow \textrm{arg max}_{A\in \Theta}f(A,U_t)$\\
+
+($f$ is the total reward from solution set $A$ when the current Upper Confidence Bounds are $U_t$)
 
 Observe the weights of chosen items:
 
@@ -224,15 +227,14 @@ Update counts and expected values for each edge:
 
 This assumes that one is able to initialize by choosing to observe each edge at least once before starting the algorithm. In practice if this is not feasible then the algorithm will produce a similar output if the initial weight for each edge is assumed to be the maximum (if a maximization problem) or minimum (if a minimization problem) values of the system (but these initial values are then disregarded in the algorithm once an observation has been made).\\
 
-Note that the algorithm is computationally efficient, provided that the combinatorial optimization can be solved efficiently. All other operations are polynomial in L and K.\\
-
+Note that the algorithm is computationally efficient, provided that the combinatorial optimization can be solved efficiently. Hence, the part of selecting the optimal $A_t$ in each iteration, given the current upper confidence bounds should be a problem which can be solved efficiently. All other operations are polynomial in L and K.\\
 
 
 \subsection{FPL-TRiX}
 
-FPL-TRiX is a Follow the Perturbed Leader algorithm with TRuncated perturbations and Implicit eXploration. In the algorithm, each time an option is observed an amount is added on to a cumulative total for that particular option. This amount is based on the cost of the observed edge at that iteration and the proportion of times that the options has been selected in past iterations. This cumulative total is then used in the combinatorial optimization problem at the next iteration. The fact that the cumulative total increases only for the observed options means that eventually the total of the lower cost edges will always increase above those for the higher cost edges. Thus the higher cost edges will always eventually be explored again. This continued exploration should allow the algorithm to adapt more quickly if the situation changes, i.e. in an adversarial framework.\\
+The follow the perturbed leader (FPL) algorithm has been adapted to a combinatorial setting by \cite{neu2015first}. FPL-TRiX is a Follow the Perturbed Leader algorithm with TRuncated perturbations and Implicit eXploration. In the algorithm, each time an option is observed an amount is added on to a cumulative total for that particular option. This amount is based on the cost of the observed edge at that iteration and the proportion of times that the options has been selected in past iterations. This cumulative total is then used in the combinatorial optimization problem in the next iteration. The fact that the cumulative total increases only for the observed options means that eventually the total of the lower cost edges will always increase above those for the higher cost edges. Thus the higher cost edges will always eventually be explored again. This continued exploration should allow the algorithm to adapt more quickly if the situation changes, i.e., in an adversarial framework.\\
 
-The algorithm is set out formally below.
+\noindent The algorithm is set out formally below.
 
 \noindent \hrulefill
 
@@ -250,7 +252,7 @@ $\mathbf{\hat{L}}_0 = 0$
 
 $n_0(e) \leftarrow 1$ $\forall$ $e \in E$\\
 
-\noindent \textit{For all t in 1,...,T}:
+\noindent \textit{For all t in 1,\ldots,T}:
 
 Draw perturbation vector $\mathbf{Z}_t$ with each component drawn from the exponential distributions truncated at $B_t$\\
 
@@ -276,10 +278,11 @@ Update $\mathbf{\hat{L}}_t$:
 
 \noindent \hrulefill\\
 
+As with CombUCB1, here as well it is assumed that the solution to the optimization/combinatorial part is efficiently available.
 
 \subsection{CombLinTS}
 
-
+According to \cite{wen2015efficient}, a modification to the original work by \cite{thompson1933}.
 
 
 \pagebreak
@@ -292,34 +295,37 @@ Update $\mathbf{\hat{L}}_t$:
 
 \subsection{Basic stochastic setting}
 
-For some initial insight into how the algorithms work in practice we can set up a basic simulation with a trivial combinatorial element. In this scenario we will have a vector of length L, and at each round K elements of this vector will be chosen. The weights of each chosen element will then be drawn from a Bernoulli distribution with a different mean for each element. A real-life application of such a system could be arranging adverts on a website where only K out of L adverts can be shown at any one time, and the goal is to maximise the number of times a user clicks on a link in an advert.\\
+For some initial insight into how the algorithms work in practice we can set up a basic simulation with a trivial combinatorial element. In this scenario we will have a vector of length L, and at each round K elements of this vector will be chosen. The weights of each chosen element will then be drawn from a Bernoulli distribution with a different mean for each element. A real-life application of such a system could be arranging adverts on a website where only K out of L adverts can be shown at any one time, and the goal is to maximize the number of times a user clicks on a link in an advert.\\
 
-We start by setting L = 20, K = 5 and set the means as incrementally increasing values from 1/20 for the first element to 1 for the last element (so they are 1/20, 2/20, ..., 18/20, 19/20, 1). The game is to maximise the weights observed at each round. Clearly the optimal elements to play at each round are the last 5 elements as they have the highest probability of being drawn as 1. Let us observe how the algorithms explore the different options at different stages.\\
+We start by setting L = 20, K = 5 and set the means as incrementally increasing values from 1/20 for the first element to 1 for the last element (so they are 1/20, 2/20, \ldots, 18/20, 19/20, 1). The game is to maximize the weights observed at each round. Clearly the optimal elements to play at each round are the last 5 elements as they have the highest probability of being drawn as 1. Let us observe how the algorithms explore the different options at different stages.\\
 
 
 \noindent \textbf{CombUCB1}\\
 
 
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \begin{subfigure}{.33\textwidth}
   \centering
   \includegraphics[width=50mm]{../plots/basicCombUCB1_100iters.pdf}
+  \caption{}
 \end{subfigure}%
 \begin{subfigure}{.33\textwidth}
   \centering
   \includegraphics[width=50mm]{../plots/basicCombUCB1_100_200iters.pdf}
+  \caption{}
 \end{subfigure}
 \begin{subfigure}{.33\textwidth}
   \centering
   \includegraphics[width=50mm]{../plots/basicCombUCB1_4000_4100iters.pdf}
+  \caption{}
 \end{subfigure}
 \caption{CombUCB1 exploration at different stages}
-\label{fig:ullm-particle}
+\label{fig:combucb1_basic}
 \end{figure}
 
-Figure XXX shows how at the outset the algorithm is not confident what the expected value of any of the weights are and so it explores a lot. Figure XXX shows iterations 101 to 200, when the algorithm is starting to learn which elements have the highest expected value. Finally Figure XXX shows the algorithm after 4000 iterations at which time is has become quite confident which are the optimal paths, and does relatively little exploration.\\
+\noindent Figure \ref{fig:combucb1_basic}(a) shows how at the outset, the algorithm is not confident what the expected value of any of the weights are and so it explores a lot. Figure \ref{fig:combucb1_basic}(b) shows iterations 101 to 200, when the algorithm is starting to learn which elements have the highest expected value. Finally Figure \ref{fig:combucb1_basic}(c) shows the algorithm after 4000 iterations at which time is has become quite confident which are the optimal paths, and does relatively little exploration.\\
 
 The regret risk can be calculated as the sum of observed weights minus the sum of the weights of the top 5 elements of the vector. For 10,000 iterations this gives the following:\\
 
@@ -329,11 +335,11 @@ Actual path reward = 41,905
 
 Regret = 494\\
 
-The algorithm performs very well at finding a near optimal solution.\\
+\noindent The algorithm performs very well at finding a near optimal solution.\\
 
 \noindent \textbf{Adapted-FPL-TRiX}\\
 
-Figure XXX shows the corresponding charts for FPL-TRiX but adapted to find a maximum solution as opposed to a minimum solution. In fact, by making this change to find a maximum the essence of FPL-TRiX is missed, which is that it adapts well in adversarial cases by keeping more of an open mind about trying the different options even once it has started to recognise the optimal solution. However, even though this is not exactly FPL-TRiX, it is interesting to include here as, with a bit of parameter tuning, it performs incredibly well in this situation. The reward and regret are:\\
+Figure \ref{fig:fpltrix_basic} shows the corresponding charts for FPL-TRiX but adapted to find a maximum solution as opposed to a minimum solution. In fact, by making this change to find a maximum, the essence of FPL-TRiX is missed, which is that it adapts well in adversarial cases by keeping more of an open mind about trying the different options even once it has started to recognize the optimal solution. However, even though this is not exactly FPL-TRiX, it is interesting to include here as, with a bit of parameter tuning, it performs incredibly well in this situation. The reward and regret are:\\
 
 Optimal path reward = 42,399
 
@@ -343,7 +349,7 @@ Regret = 153\\
 
 Thus the algorithm outperforms CombUCB1. If we think of this slightly modified FPL-TRiX as part of the family of FPL-TRiX then it shows that this can be a nice adaptable framework to work in.\\
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \begin{subfigure}{.33\textwidth}
   \centering
@@ -358,12 +364,8 @@ Thus the algorithm outperforms CombUCB1. If we think of this slightly modified F
   \includegraphics[width=50mm]{../plots/basicFPL_4000_4100iters.pdf}
 \end{subfigure}
 \caption{Adapted-FPL-TRiX exploration at different stages}
-\label{fig:ullm-particle}
+\label{fig:fpltrix_basic}
 \end{figure}
-
-
-
-
 
 
 \pagebreak
@@ -374,15 +376,15 @@ Thus the algorithm outperforms CombUCB1. If we think of this slightly modified F
 
 \section{Network minimum cost path problems}
 
-A more sophisticated combinatorial problem to solve is a minimum cost path problem in a network. In this framework there are V vertices with edges in both directions between each pair of vertices, giving V $\times$ (V-1) edges in total (in practice if an edge does not exist between two vertices then the cost of the edge can be set to infinity). A path is chosen to travel from some starting vertex to an end vertex. The cost of each edge in the path is then stochastically drawn and the sum of these provides the total cost of the chosen path. The goal is to find the path with minimum expected cost. Clear application of this type of system in real-life could be any type of mass scale distibution such as electricity or communication networks.\\
+A more sophisticated combinatorial problem to solve is a minimum cost path problem in a network. In this framework there are V vertices with edges in both directions between each pair of vertices, giving V $\times$ (V-1) possible edges in total (in practice if an edge does not exist between two vertices then the cost of the edge can be set to infinity). A path is chosen to travel from some starting vertex to an end vertex. The cost of each edge in the path is then stochastically drawn and the sum of these provides the total cost of the chosen path. The goal is to find the path with minimum expected cost. In the following setup we study the minimum cost path from the first vertex to the last vertex of the graph where the weights are generated according to different criteria as described further. Clear application of this type of system in real-life could be any type of mass scale distribution such as electricity or communication networks.\\
 
-Given the more difficult combinatorial problem, this pushes the Algorithms harder. They will need to work out which higher cost edges are beneficial to use in order to take advantage of low cost paths than lead into or out of them. Thus the relative level of regret should be much higher than the previous more basic problem.\\
+Given the more difficult combinatorial problem, this pushes the algorithms harder. They will need to work out which higher cost edges are beneficial to use in order to take advantage of low cost paths than lead into or out of them. Thus the relative level of regret should be much higher than the previous more basic problem.\\
 
 \subsection{Stochastic networks}
 
-Firstly we look at how CombUCB1 and FPL-TRiX perform in the stochastic setting, where the weights of the edges are drawn from truncated normal distributions limited to being between 0 and 1. Each edge has a different central point (i.e. different mean), and the variance was kept low at 0.1 so that there is a meaningful difference between the different paths.\\
+Firstly we look at how CombUCB1, FPL-TRiX and CombLinTS perform in the stochastic setting, where the weights of the edges are drawn from truncated normal distributions limited to being between 0 and 1. Each edge has a different central point (i.e., different mean), and the variance was kept low at 0.1 so that there is a meaningful difference between the different paths.\\
 
-With 10 vertices and observing 10,000 iterations the following costs were observed. This was after tuning the FPL-TRiX parameters, in particular reducing the gamma parameter to 0.01.\\
+With 10 vertices and observing 10,000 iterations the following costs were observed. This was after tuning the FPL-TRiX and CombLinTS parameters, in particular reducing the $\gamma$ parameter in FPL-TRiX to 0.01.\\
 
 Optimal path cost = 3,517
 
@@ -392,9 +394,9 @@ FPL-TRiX path cost = 4,217
 
 CombLinTS = 3,553\\
 
-Perhaps surprisingly, FPL-TRiX is able to significantly outperform CombUCB1 in this situation. Figure XXX shows the edges of the optimal path at each iteration, and the edges of the paths chosen by CombUCB1 and FPL-TRiX. FPL-TRiX explores more at first allowing it to find the optimal path more quickly, whereas CombUCB1 is led towards shorter paths at first. If all edges start with similar wide confidence intervals then the paths with the least number of edges will appear to have the lowest costs. It is only after some time (around 200 iterations in this case) that CombUCB1 finds accurate enough estimates of the edges to work out that a longer path is in fact the optimal.\\
+Perhaps surprisingly, FPL-TRiX is able to significantly outperform CombUCB1 in this situation. Figure \ref{fig:stochastic_network} shows the edges of the optimal path at each iteration, and the edges of the paths chosen by the 3 algorithms. FPL-TRiX explores more at first allowing it to find the optimal path more quickly, whereas CombUCB1 is led towards shorter paths at first. CombLinTS is tuned for less exploration and quickly latches on to the best optimal path and little exploration thereafter. If all edges start with similar wide confidence intervals then the paths with the least number of edges will appear to have the lowest costs. It is only after some time (around 200 iterations in this case) that CombUCB1 finds accurate enough estimates of the edges to work out that a longer path is in fact the optimal.\\
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \begin{subfigure}{.49\textwidth}
   \centering
@@ -412,65 +414,65 @@ Perhaps surprisingly, FPL-TRiX is able to significantly outperform CombUCB1 in t
   \centering
   \includegraphics[width=65mm]{../plots/stoch_network_CombLinTS.pdf}
 \end{subfigure}
-\caption{Optimal paths, CombUCB1 chosen paths, FPL-TRiX and CombLinTS chosen paths}
-\label{fig:ullm-particle}
+\caption{Optimal paths, CombUCB1, FPL-TRiX and CombLinTS chosen paths}
+\label{fig:stochastic_network}
 \end{figure}
 
 
 \subsection{Adversarial networks}
 
-In this section we will progress to analysing the performance of the algorithms in an adversarial setting. To do this we continue the minimum cost path setting of the previous section, but allow the weights of the edges to be drawn from different distributions over different periods. The following three different settings were investigated\\
+In this section we will progress to analyzing the performance of the algorithms in an adversarial setting. To do this we continue the minimum cost path setting of the previous section, but allow the weights of the edges to be drawn from different distributions over different periods of time. The following three different settings were investigated:\\
 
 \subsubsection{Adversarial network 1 - long to short optimal path}
 
-The first adversarial network we analyse starts with the optimal path being to visit each vertex sequentially from the first vertex to the last. Thus with 10 vertices the initial optimal path is nine edges long. After 5,000 iterations the optimal path changes to a shorter path of only two edges. The mean weights of the edges are shown in the network matrices in figure XXX. Element (i,j) of each matrix represents the mean of the truncated normal distribution that the weight of the edge from vertex i to j is drawn from at each iteration. In figure XXX the shortest path is from vertex 0 to 3 and then from 3 to 9\\
+The first adversarial network we analyze starts with the optimal path being to visit each vertex sequentially from the first vertex to the last. Thus with 10 vertices the initial optimal path is nine edges long. This is setup by having the minimum means for these edges when generating the weights. After 5,000 iterations the optimal path changes to a shorter path of only two edges. The mean weights of the edges are shown in the network matrices in Figure \ref{fig:adv_net1}. Element (i,j) of each matrix represents the mean of the truncated normal distribution that the weight of the edge from vertex i to j is drawn from at each iteration. In Figure \ref{fig:adv_net1a} the shortest path is from vertex 0 to 3 and then from 3 to 9 in Figure \ref{fig:adv_net1b}.\\
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \begin{subfigure}{1.0\textwidth}
   \centering
   \includegraphics[width=14cm]{../plots/path_means1.png}
-  \caption{Adversarial netrork 1 - initial mean edge weights}
-  \label{}
+  \caption{Adversarial network 1 - initial mean edge weights}
+  \label{fig:adv_net1a}
   \includegraphics[width=14cm]{../plots/path_means2.png}
   \caption{Adversarial network 1 - second phase mean edge weights}
-  \label{}
+  \label{fig:adv_net1b}
 \end{subfigure}
 \caption{Adversarial network 1 mean path weights at each phases}
-\label{fig:ullm-particle}
+\label{fig:adv_net1}
 \end{figure}
 
 
 \subsubsection{Adversarial network 2 - short to long optimal path}
 
-The second adversarial network is similar to the first but in reverse, whereby at first the optimal path is the shortest path, i.e. one edge straight from the first to the last vertex. After 1,000 iterations the optimal paths changes to one with many edges. The network alternates between these two situations every 1,000 iterations. The mean weights of the edges are shown in figure XXX.\\
+The second adversarial network is similar to the first but in reverse, whereby at first the optimal path is the shortest path, i.e., one edge straight from the first to the last vertex. After 1,000 iterations the optimal paths changes to one with many edges. The network alternates between these two situations every 1,000 iterations. The mean weights of the edges are shown in Figure \ref{fig:adv_net2}.\\
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \begin{subfigure}{1.0\textwidth}
   \centering
   \includegraphics[width=14cm]{../plots/path_means3.png}
   \caption{Adversarial network 2 - initial mean edge weights}
-  \label{}
+  %\label{}
   \includegraphics[width=14cm]{../plots/path_means4.png}
   \caption{Adversarial network 2 - second phase mean edge weights}
-  \label{}
+  %\label{}
 \end{subfigure}
 \caption{Adversarial network 2 mean path weights at each phases}
-\label{fig:ullm-particle}
+\label{fig:adv_net2}
 \end{figure}
 
 
 
 \subsubsection{Adversarial network 3 - wavelike changes}
 
-In this final adversarial case the mean edge weights increase and decrease gradually over time. Each mean edge weight is essentially a point on a sine wave but shifted up by 1 so that it is always positive and divided by 2 so that the mean edge values fall between 0 and 1. The mean edge weights shift along the sine wave over time so that they gradually increase and decrease. The edges are positioned on the sine wave relative to each other depenent on how close the vertices are which they connect. For example the edges between vertices 1 and 4 and between vertices 5 and 8 will be at the same position on the sine wave (because their vertices are labelled 3 numbers apart), but they will be far away from the edge which connects vertices 2 and 9.\\
+In this final adversarial case, the mean edge weights increase and decrease gradually over time. Each mean edge weight is essentially a point on a sine wave but shifted up by 1 so that it is always positive and divided by 2 so that the mean edge values fall between 0 and 1. The mean edge weights shift along the sine wave over time so that they gradually increase and decrease. The edges are positioned on the sine wave relative to each other dependent on how close the vertices are which they connect. For example, the edges between vertices 1 and 4 and between vertices 5 and 8 will be at the same position on the sine wave (because their vertices are labeled 3 numbers apart), but they will be far away from the edge which connects vertices 2 and 9.\\
 
 The idea of this adversarial case is that it represents gradual shifts over time. Each cycle of the sine wave could be thought of as day and night periods for example, where the edges represent the cost of a communication path. During the days the costly edges would be those which connect businesses which are active during the day, and at night the costly edges switch to those which connect homes which become busy as people return from work.\\
 
 The following table shows the total cost of each algorithm for each of the networks. It also shows the cost for the first 1,000 iterations, the middle 1,000 (when networks 1 and 2 shift) and the last 1,000 to show how each algorithm performs at the different stages.\\
 
-\begin{table}[h]
+\begin{table}[ht]
 \begin{tabular}{ |p{3.5cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
  \hline
  \multicolumn{5}{|c|}{Costs of each algorithm over each adversarial network} \\
@@ -496,22 +498,22 @@ The following table shows the total cost of each algorithm for each of the netwo
   - final 1000 iters.   & 781           & 964       & 1,245     & 1,594       \\
  \hline
 \end{tabular}
-\caption{Costs}
+\caption{Cost Comparison in Adversarial Networks}
 \end{table}
 
 
-In the first adversarial network FPL-TRiX is quicker to identify the long optimal path at the beginning (similar to the result in the stochastic setting). Both algorithms move towards the optimal path in the second phase, but CombUCB1 explores less in this stage which ultimately leads to it returning a lower total cost.\\
+In the first adversarial network FPL-TRiX is quicker to identify the long optimal path at the beginning (similar to the result in the stochastic setting). CombLinTS performs better than both CombUCB1 and FPL-TRiX in the this case due to its greater flexibility in terms of tuning its exploration parameters. All algorithms move towards the optimal path in the second phase, but CombUCB1 explores less in this stage which ultimately leads to it returning a lower total cost.\\
 
-The second adversarial framework tries to exploit the fact that CombUCB1 can be slower than FPL-TRiX to adapt to new paths. Indeed this seems to be the case as it performs worse. The cost at the end is less with CombUCB1 but this is a result of the end period being the state with the optimal path that CombUCB1 has got stuck in. Looking at the 1,000 iterations prior to this then CombUCB1's cost is 1,995 and FPL-TRiX's cost is 1,150. Figure XXX shows the progress of the costs of each algorithm over time. It is clear that CombUCB1 goes through phases of slowly increasing cost for 1,000 iterations and then rapidly increasing cost for 1,000 iterations.\\
+The second adversarial framework tries to exploit the fact that CombUCB1 can be slower than FPL-TRiX to adapt to new paths. Indeed this seems to be the case as it performs worse. The cost at the end is less with CombUCB1 but this is a result of the end period being the state with the optimal path that CombUCB1 has got stuck in. Looking at the 1,000 iterations prior to this then CombUCB1's cost is 1,995 and FPL-TRiX's cost is 1,150. Figure \ref{fig:cumul_costs} shows the progress of the costs of each algorithm over time. It is clear that CombUCB1 goes through phases of slowly increasing cost for 1,000 iterations and then rapidly increasing cost for 1,000 iterations. Not surprisingly, CombLinTS can be tuned for more exploration in this scenario and performs better than the other 2 algorithms. This provides evidence to say that CombLinTS is the best choice in cases where some prior information about the network structure can be obtained and the feature matrix can be exploited as well.\\
 
-\begin{figure}[h!]%                 use [hb] only if necceccary!
+\begin{figure}[ht!]%                 use [hb] only if necceccary!
   \centering
   \includegraphics[width=10cm]{../plots/advers_net2_cumul_costs.jpg}
   \caption{Adversarial network 2 - cumulative costs}
-  \label{}
+  \label{fig:cumul_costs}
 \end{figure}
 
-Finally, when the situation is gradually evolving like in the third case, CombUCB1 never becomes too confident on any paths and so it keeps exploring more and performs well again compared to FPL-TRiX.\\
+Finally, when the situation is gradually evolving like in the third case, CombUCB1 never becomes too confident on any paths and so it keeps exploring more and performs well again compared to FPL-TRiX. CombLinTS is not very successful in this scenario due to greater uncertainty. An \emph{exploitation} approach can be beneficial in such scenarios depending on how large the gap between the optimal and best suboptimal path is.\\
 
 
 \pagebreak
@@ -526,13 +528,13 @@ From the analysis so far, some benefits of FPL-TRiX over CombUCB1 are that it ca
 
 \subsection{Exploration score}
 
-To measure the amount of exploration an algorithm is doing we introduce an "impurity" function. This calculates the proportion of iterations in which each edge is chosen. This value is then multiplied by 1 minus itself (so if the value is p then the calculation is p$\times$(1-p)) and then multiplied by 4 so that the possible values range between 0 and 1. Finally the average of these values is taken over all the edges and multiplied by 1,000 so that the numbers are not tiny.\\
+To measure the amount of exploration an algorithm is doing we introduce an ``impurity" function. This calculates the proportion of iterations in which each edge is chosen. This value is then multiplied by 1 minus itself (so if the value is p then the calculation is p$\times$(1-p)) and then multiplied by 4 so that the possible values range between 0 and 1. Finally the average of these values is taken over all the edges and multiplied by 1,000 so that the numbers are not tiny.\\
 
 \subsection{Parameters, exploration scores and costs}
 
-To see how the parameters affect exploration and cost let us first observe the performance of FPL-TRiX in the stochastic network. Figure XXX show how the total cost and level of exploration change as the different parameter values change. The main point to note here is that when there is less exploration the algorithm performs better.\\
+To see how the parameters affect exploration and cost let us first observe the performance of FPL-TRiX in the stochastic network. Figure \ref{fig:exploration_score} shows how the total cost and level of exploration change as the different parameter values change. The main point to note here is that when there is less exploration the algorithm performs better.\\
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -547,17 +549,17 @@ To see how the parameters affect exploration and cost let us first observe the p
   \includegraphics[width=65mm]{../plots/Bt_expl_cost.pdf}
 \end{subfigure}
 \caption{\textcolor{blue}{Exploration score} and \textcolor{RubineRed}{total cost} for different $\eta$, $\gamma$ and $B_t$}
-\label{fig:ullm-particle}
+\label{fig:exploration_score}
 \end{figure}
 
 
 \subsection{Dynamic $B_t$ parameter}
 
-In Neu 2015 [2] it is proposed that the $B_t$ parameter in FPL-TRiX is non-increasing, but is variable over time. $B_t$ is a control on the amount that the algorithm explores - the higher $B_t$ is the larger the perturbations are able to be and therefore it is more likely for "worse" performing edges to be perturbed to a value where they are chosen in an iteration. Therefore   one idea to improve the performance of FPL-TRiX in adversarial cases is to allow the $B_t$ parameter to adjust to the situation. In particular, if the situation changes then the parameter could be increased to encourage exploration to find a new optimal path, after which the parameter would be decreased again.\\
+In \cite{neu2015first} it is proposed that the $B_t$ parameter in FPL-TRiX is non-increasing, but is variable over time. $B_t$ is a control on the amount that the algorithm explores - the higher $B_t$ is, the larger the perturbations are able to be and therefore it is more likely for ``worse" performing edges to be perturbed to a value where they are chosen in an iteration. Therefore, one idea to improve the performance of FPL-TRiX in adversarial cases is to allow the $B_t$ parameter to adjust to the situation. In particular, if the situation changes then the parameter could be increased to encourage exploration to find a new optimal path, after which the parameter would be decreased again.\\
 
-These parameter adjustments could be carried out with some prior knowledge of the system. For example, for communications networks, this could be at the start and at the end of normal working hours, or at the beginning of seasons or holiday periods. Another way to adjust the parameter could be to allow it to somehow recognise itself when the situation changes. For example if the variance of the reward/cost at each iteration changes.\\
+These parameter adjustments could be carried out with some prior knowledge of the system. For example, for communications networks, this could be at the start and at the end of normal working hours, or at the beginning of seasons or holiday periods. Another way to adjust the parameter could be to allow it to somehow recognize itself when the situation changes. For example if the variance of the reward/cost at each iteration changes.\\
 
-Testing out this idea in the adversarial cases previously discussed, however, bares little fruit. The main reason for this is that $B_t$ makes little to no difference on the outcome of the algorithm. In fact the main effect it has is to increase the variance of the result. This can be observed in figure XXX whereby changing the $B_t$ parameter has a seemingly unpredictable effect on the cost.\\
+Testing out this idea in the adversarial cases previously discussed, however, bares little fruit. The main reason for this is that $B_t$ makes little to no difference on the outcome of the algorithm. In fact the main effect it has is to increase the variance of the result. This can be observed in Figure \ref{fig:exploration_score}(c) whereby changing the $B_t$ parameter has a seemingly unpredictable effect on the cost.\\
 
 
 \subsection{Dynamic $\gamma$ parameter}
@@ -565,7 +567,7 @@ Testing out this idea in the adversarial cases previously discussed, however, ba
 Given that, in practice, the $B_t$ does not have a clearly observable effect on the outcome of FPL-TRiX in an adversarial network, perhaps allowing some of the other parameters to vary could yield better results. Testing the cost at different periods with different $\gamma$ parameters yields the following:\\
 
 \begin{table}[h]
-\begin{tabular}{ |p{3cm}||p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.2cm}|  }
+\begin{tabular}{ |p{3.2cm}||p{1.6cm}|p{1.6cm}|p{1.6cm}|p{1.6cm}|p{1.6cm}|  }
  \hline
  \multicolumn{6}{|c|}{Costs at different periods for differnt $\gamma$ parameters}  \\
  \hline
@@ -575,21 +577,21 @@ Given that, in practice, the $B_t$ does not have a clearly observable effect on 
  $\gamma=0.1$         & 725     & 716       & 1,037     & 699         & 7,735       \\
  \hline
 \end{tabular}
-\caption{$\gamma$ costs}
+\caption{Costs for different $\gamma$}
 \end{table}
 
-The lower $\gamma$ parameter provides the best results in the early stages but then once the system changes the higher $\gamma$ parameter yields better results. So can changing the $\gamma$ parameter over time reduce the total cost returned? It seems like a parameter of 0.01 performs best at first and then changing to 0.1 is better for the second stage. However, in reality simply changing the parameter in this way does not lead to the best performance here. The behaviour over time of each scenario can be observed in figure XXX.\\
+The lower $\gamma$ parameter provides the best results in the early stages but then once the system changes, the higher $\gamma$ parameter yields better results. So can changing the $\gamma$ parameter over time reduce the total cost returned? It seems like a parameter of 0.01 performs best at first and then changing to 0.1 is better for the second stage. However, in reality simply changing the parameter in this way does not lead to the best performance here. The behavior over time of each scenario can be observed in Figure \ref{fig:gamma-effect}.\\
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \begin{subfigure}{1.0\textwidth}
   \centering
   \includegraphics[width=10cm]{../plots/changing_gamma_cumul_cost.jpg}
-  \caption{}
-  \label{}
+  %\caption{}
+  %\label{}
 \end{subfigure}
 \caption{Cumulative cost for different gamma parameters}
-\label{fig:ullm-particle}
+\label{fig:gamma-effect}
 \end{figure}
 
 The total cost seems to be largely determined by the settings at the initial stages. Although changing the parameter when the adversarial situation changes does appear to be advantageous compared to keeping it at 0.01, it still lags the performance when gamma is set to 0.1 for the entire time. It does, however, suggest that using some sort of changing $\gamma$ parameter could be beneficial in some cases, and indeed in this case the changing parameter model is lowest cost after around 6,000 iterations.
@@ -602,7 +604,7 @@ The total cost seems to be largely determined by the settings at the initial sta
 %	THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
 
-\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
+%\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
 
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
@@ -615,7 +617,8 @@ The total cost seems to be largely determined by the settings at the initial sta
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 
-
-
+\newpage
+\bibliographystyle{unsrtnat}
+\bibliography{CBP}
 
 \end{document}
