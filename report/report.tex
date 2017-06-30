@@ -37,6 +37,12 @@
 \usepackage{subcaption}
 \usepackage[usenames, dvipsnames]{color}
 \usepackage{natbib}
+%\usepackage{algorithmicx}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+%\floatname{algorithm}{Procedure}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
 
 \begin{document}
 
@@ -282,8 +288,27 @@ As with CombUCB1, here as well it is assumed that the solution to the optimizati
 
 \subsection{CombLinTS}
 
-According to \cite{wen2015efficient}, a modification to the original work by \cite{thompson1933}.
+The Combinatorial Linear Thompson Sampling is a modification of the original work of \cite{thompson1933} by \cite{wen2015efficient} in a combinatorial setting. This kind of setting is mostly favorable when the total available choices $L$ is intractably large. However, similar options in such large sets will tend to have similar features which can help make good decisions more efficiently. The \emph{linear generalization} approach to such settings involve modeling the available options and the rewards/costs associated with them as a linear model which outputs the corresponding rewards/costs. The coefficients of such a model are essentially learned by the algorithm by way of exploration and exploitation whereby the estimates for the coefficients improve with the number of iterations. Hence, conditioned on the features of an item, the expected weight of that item can be estimated using a linear model. The problem setup is the same as in the previous 2 algorithms where we must choose at max $K$ items from a ground set of $L$ options. We allow the agent to use any approximation/randomized algorithm ORACLE to solve the combinatorial part of the problem.\\
 
+The algorithm is set out formally below:
+\begin{algorithm}
+\caption{CombLinTS algorithm}\label{alg:comblints}
+\begin{algorithmic}[0]
+\Require{Combinatorial structure (E, $\mathcal{A}$), generalization matrix $\Phi \in \mathbf{R}^{L \times d}$, parameters $\lambda, \sigma >0$, oracle}
+\State Initialize $\Sigma_1 \gets \lambda^2 I \in \mathbf{R}^{d \times d}$ and $\overline{\theta_1} = 0 \in \mathbf{R}^d$
+\ForAll{$t=1,2,\ldots,n$}
+\State Sample $\theta_t \sim N(\overline{\theta_t},\Sigma_t)$
+\State Compute $A^t \gets oracle(E,\mathcal{A},\Phi \theta_t)$
+\State Choose options $A^t$, and observe corresponding weights for chosen items
+\State Update $\overline{\theta}_{t+1}$ and $\Sigma_{t+1}$ based on Kalman Filtering
+\EndFor
+\Ensure{Chosen items in each iteration}
+\end{algorithmic}
+\end{algorithm}
+
+Based on this algorithm, updated weights are achieved in every iteration which tend to get closer to the optimal solutions. However, this updation is highly influenced by the choice of parameters $\lambda$ and $\sigma$ which control the exploration or the learning rate. Specifically, $\lambda$ is an inverse-regularization parameter and smaller $\lambda$ makes the covariance matrix closer to 0 which leads to slower learning. Thus, a small $\lambda$ can lead to less exploration and poor performance of the algorithm. $\sigma$ on the other hand,handles the decrease rate of the covariance matrix during updation in the Kalman-Filtering step. A large $\sigma$ ensure more exploration whereas a small value makes the algorithm quickly converge to some sub-optimal coefficient vector.\\
+
+Hence, CombLinTS makes a fine balance of exploration through a combination of 2 parameters. Depending on the situation, smaller or larger values will provide favorable results. Although, at the same time, this also implies that finding the perfect balance in adversarial scenarios can prove really challenging.
 
 \pagebreak
 
@@ -338,17 +363,6 @@ Regret = 494\\
 \noindent The algorithm performs very well at finding a near optimal solution.\\
 
 \noindent \textbf{Adapted-FPL-TRiX}\\
-
-Figure \ref{fig:fpltrix_basic} shows the corresponding charts for FPL-TRiX but adapted to find a maximum solution as opposed to a minimum solution. In fact, by making this change to find a maximum, the essence of FPL-TRiX is missed, which is that it adapts well in adversarial cases by keeping more of an open mind about trying the different options even once it has started to recognize the optimal solution. However, even though this is not exactly FPL-TRiX, it is interesting to include here as, with a bit of parameter tuning, it performs incredibly well in this situation. The reward and regret are:\\
-
-Optimal path reward = 42,399
-
-Actual path reward = 42,246
-
-Regret = 153\\
-
-Thus the algorithm outperforms CombUCB1. If we think of this slightly modified FPL-TRiX as part of the family of FPL-TRiX then it shows that this can be a nice adaptable framework to work in.\\
-
 \begin{figure}[ht!]
 \centering
 \begin{subfigure}{.33\textwidth}
@@ -367,6 +381,52 @@ Thus the algorithm outperforms CombUCB1. If we think of this slightly modified F
 \label{fig:fpltrix_basic}
 \end{figure}
 
+Figure \ref{fig:fpltrix_basic} shows the corresponding charts for FPL-TRiX but adapted to find a maximum solution as opposed to a minimum solution. In fact, by making this change to find a maximum, the essence of FPL-TRiX is missed, which is that it adapts well in adversarial cases by keeping more of an open mind about trying the different options even once it has started to recognize the optimal solution. However, even though this is not exactly FPL-TRiX, it is interesting to include here as, with a bit of parameter tuning, it performs incredibly well in this situation. The reward and regret are:\\
+
+Optimal path reward = 42,399
+
+Actual path reward = 42,246
+
+Regret = 153\\
+
+Thus the algorithm outperforms CombUCB1. If we think of this slightly modified FPL-TRiX as part of the family of FPL-TRiX then it shows that this can be a nice adaptable framework to work in.\\
+
+\noindent \textbf{CombLinTS}\\
+
+
+
+\begin{figure}[ht!]
+\centering
+\begin{subfigure}{.33\textwidth}
+  \centering
+  \includegraphics[width=50mm]{../plots/basicCombLinTS_100iters.pdf}
+  \caption{}
+\end{subfigure}%
+\begin{subfigure}{.33\textwidth}
+  \centering
+  \includegraphics[width=50mm]{../plots/basicCombLinTS_100_200iters.pdf}
+  \caption{}
+\end{subfigure}
+\begin{subfigure}{.33\textwidth}
+  \centering
+  \includegraphics[width=50mm]{../plots/basicCombLinTS_4000_4100iters.pdf}
+  \caption{}
+\end{subfigure}
+\caption{CombLinTS exploration at different stages}
+\label{fig:comblints_basic}
+\end{figure}
+
+\noindent Figure \ref{fig:comblints_basic}(a) and \ref{fig:comblints_basic}(b) show how the algorithm is not confident of the best paths and weights and so it explores a lot. Figure \ref{fig:comblints_basic}(c) shows that after a few thousand iterations, the algorithm is confident that the last few arms are best ones which corresponds well to the problem setup and the exploration proportion goes down significantly.\\
+
+The regret risk can be calculated as the sum of observed weights minus the sum of the weights of the top 5 elements of the vector. For 10,000 iterations this gives the following:\\
+
+Optimal path reward = 42,399
+
+Actual path reward = 41,900
+
+Regret = 499\
+
+\noindent The algorithm performs very well at finding a near optimal solution but after several iterations so it needs time. Although it doesn't get stuck on a similar suboptimal solution so it's rewarding in the long run.\\
 
 \pagebreak
 
