@@ -128,7 +128,7 @@ Recent literature has proposed many different algorithms and approaches for thes
 
 \section{Acknowledgements}
 %\addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
-The acknowledgments and the people to thank go here
+Thanks
 
 \pagebreak
 
@@ -177,7 +177,7 @@ The algorithms shown below are based on the following framework:\\There is a set
 
 \subsection{CombUCB1}
 
-One of the most well-known algorithms for multi-armed bandit problems is UCB1. This has been adapted to the combinatorial setting by \cite{kveton2015tight}, who developed CombUCB1. After each iteration the algorithm calculates a confidence bound around the empirical mean reward/cost of each element. These confidence bounds are then used in the combinatorial optimization problem, the solution of which is the chosen play for the next round. The more observations that are available of an element, the tighter the confidence bound around the expected value. Loosely speaking, relatively unobserved items will have larger confidence bounds so they will be explored until there is more confidence in their expected value.\\
+One of the most well-known frameworks for multi-armed bandit problems is UCB. This has been adapted to the combinatorial setting by \cite{kveton2015tight}, who developed CombUCB1. In their paper they developed bounds for the regret risk in a stochastic reward setting. After each iteration the algorithm calculates a confidence bound around the empirical mean reward/cost of each element. These confidence bounds are then used in the combinatorial optimization problem, the solution of which is the chosen play for the next round. The more observations of an element that are available, the tighter the confidence bound around the expected value. Loosely speaking, relatively unobserved items will have larger confidence bounds so they will be explored until there is more confidence in their expected value.\\
 
 The confidence intervals at time $t$ are calculated as:
 
@@ -232,7 +232,7 @@ Note that the algorithm is computationally efficient, provided that the combinat
 
 \subsection{FPL-TRiX}
 
-The follow the perturbed leader (FPL) algorithm has been adapted to a combinatorial setting by \cite{neu2015first}. FPL-TRiX is a Follow the Perturbed Leader algorithm with TRuncated perturbations and Implicit eXploration. In the algorithm, each time an option is observed an amount is added on to a cumulative total for that particular option. This amount is based on the cost of the observed edge at that iteration and the proportion of times that the options has been selected in past iterations. This cumulative total is then used in the combinatorial optimization problem in the next iteration. The fact that the cumulative total increases only for the observed options means that eventually the total of the lower cost edges will always increase above those for the higher cost edges. Thus the higher cost edges will always eventually be explored again. This continued exploration should allow the algorithm to adapt more quickly if the situation changes, i.e., in an adversarial framework.\\
+The follow the perturbed leader (FPL) algorithm has been adapted to a combinatorial setting by \cite{neu2015first}. This paper introduces FPL-TRiX, which is a Follow the Perturbed Leader algorithm with TRuncated perturbations and Implicit eXploration. The paper proves regret bounds in the case of an oblivious adversary (i.e. the losses at each iteration are chosen independently of what has happened in the past). In the algorithm, each time an option is observed an amount is added on to a cumulative total for that particular option. This amount is based on the cost of the observed edge at that iteration and the proportion of times that the options has been selected in past iterations. This cumulative total is then used in the combinatorial optimization problem in the next iteration. The fact that the cumulative total increases only for the observed options means that eventually the total of the lower cost edges will always increase above those for the higher cost edges. Thus the higher cost edges will always eventually be explored again. This continued exploration should allow the algorithm to adapt more quickly if the situation changes, i.e., in an adversarial framework.\\
 
 \noindent The algorithm is set out formally below.
 
@@ -599,6 +599,12 @@ The total cost seems to be largely determined by the settings at the initial sta
 \pagebreak
 
 \section{Conclusion}
+
+The algorithms discussed in this paper have been developed with either the stochastic or adversarial framework in mind. For CombUCB1 and CombLinTS the papers which introduce them analyse regret bounds in the stochastic setting, whereas FPL-TRiX has bounds which hold in an adversarial setting. However, given the evidence in this paper, this does not mean that the algorithms are strictly better in these particular settings. There are advantages and disadvantages to each, in particular CombUCB1 seems to lag behind the others in terms of adapting quickly to a new environment, but its persistence on the optimal path once it finds it can lead it to outperform the other algorithms even in some adversarial cases.\\
+
+In the stoachastic setting, the ability to tune parameters for FPL-TRiX and CombLinTS allow the exploration element of these algorithms to be minimised, and this leads to good performance. In the adversarial setting the exploration can then be increased to help the algorithms adapt when the situation changes.\\
+
+
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
